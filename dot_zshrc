@@ -60,4 +60,6 @@ export PATH="$HOME/local/bin:$PATH"
 # fzf keybindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+[ -f ~/.cargo/env ] && source ~/.cargo/env
+
 eval "$(starship init zsh)"
