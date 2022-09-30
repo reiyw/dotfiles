@@ -27,3 +27,9 @@ $(brew --prefix)/opt/fzf/install
 {{ end -}}
 
 ~/.fzf/install --key-bindings --completion --no-update-rc
+
+if command -v starship >/dev/null 2>&1; then 
+    echo "starship already installed"
+else
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)" -y -f
+fi
