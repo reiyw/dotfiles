@@ -4,8 +4,6 @@
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
-# Aliases and better defaults for exa.
-zmodule exa
 # Configures fzf for faster fetching of files and directories names.
 zmodule fzf
 # Provides handy git aliases and functions.
