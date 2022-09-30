@@ -1,0 +1,22 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+sudo ()
+{
+    [[ $EUID = 0 ]] || set -- command sudo "$@"
+    "$@"
+}
+sudo apt install -y \
+    fzf \
+    exa \
+    fd-find \
+    ripgrep \
+    ;
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+brew install \
+    fzf \
+    exa \
+    fd \
+    ripgrep \
+    ;
+{{ end -}}
