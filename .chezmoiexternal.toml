@@ -8,6 +8,7 @@ executable = true
 ["local/bin/lsd".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "lsd-{{ $lsdVersion }}-i686-unknown-linux-musl/lsd"]
+{{ end }}
 
 [".fzf"]
 type = "git-repo"
@@ -15,4 +16,3 @@ url = "https://github.com/junegunn/fzf"
 refreshPeriod = "168h"
 [".fzf".clone]
 args = ["--depth", "1"]
-{{ end }}

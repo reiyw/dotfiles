@@ -13,18 +13,17 @@ sudo apt install -y \
     ripgrep \
     ;
 
-~/.fzf/install --key-bindings --completion --no-update-rc
-
 {{ else if eq .chezmoi.os "darwin" -}}
 
 #!/bin/bash
 brew install \
     bat \
     fd \
-    fzf \
     lsd \
     ripgrep \
     ;
 $(brew --prefix)/opt/fzf/install
 
 {{ end -}}
+
+~/.fzf/install --key-bindings --completion --no-update-rc
