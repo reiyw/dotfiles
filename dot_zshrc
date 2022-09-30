@@ -50,3 +50,5 @@ unset key
 
 alias b=batcat
 alias fd=fdfind
+
+export PATH="$HOME/local/bin:$PATH"
