@@ -6,6 +6,7 @@ sudo ()
     "$@"
 }
 sudo apt install -y \
+    bat \
     fzf \
     exa \
     fd-find \
@@ -14,6 +15,7 @@ sudo apt install -y \
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 brew install \
+    bat \
     fzf \
     exa \
     fd \
