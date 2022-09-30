@@ -56,3 +56,6 @@ alias la='ls -a'
 alias lt='ls --tree'
 
 export PATH="$HOME/local/bin:$PATH"
+
+# fzf keybindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
