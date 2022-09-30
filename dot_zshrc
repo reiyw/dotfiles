@@ -50,13 +50,10 @@ unset key
 
 alias b=batcat
 alias fd=fdfind
-alias ls='exa --group-directories-first'
-alias ll='ls -l'
-alias l='ll -a'
-alias lr='ll -T'
-alias lx='ll -sextension'
-alias lk='ll -ssize'
-alias lt='ll -smodified'
-alias lc='ll -schanged'
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 
 export PATH="$HOME/local/bin:$PATH"
