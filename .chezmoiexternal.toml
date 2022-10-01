@@ -20,6 +20,16 @@ command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/ghq_linux_amd64.zip && unzip -p $tmpdir/ghq_linux_amd64.zip ghq_linux_amd64/ghq"]
 {{ end }}
 
+{{ $gitTownVersion := "7.8.0" }}
+["local/bin/git-town"]
+type = "file"
+url = "https://github.com/git-town/git-town/releases/download/v{{ $gitTownVersion }}/git-town_{{ $gitTownVersion }}_linux_intel_64.tar.gz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/git-town".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "git-town"]
+
 [".fzf"]
 type = "git-repo"
 url = "https://github.com/junegunn/fzf"
