@@ -5,6 +5,6 @@ install.sh
 .zcompdump
 *.local
 
-{{- if eq (env "REMOTE_CONTAINERS") "true" }}
+{{- if .remoteContainer }}
 .gitconfig
 {{- end }}
