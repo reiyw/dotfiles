@@ -1,6 +1,8 @@
 [user]
 	name = Ryo Takahashi
 	email = reiyw.setuve@gmail.com
+[pull]
+	ff = only
 [alias]
 	append = town append
 	hack = town hack
