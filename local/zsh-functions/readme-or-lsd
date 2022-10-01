@@ -1,0 +1,10 @@
+readme=$(fdfind -1 -d 1 readme $1)
+if [[ -n $readme ]]; then
+    if [[ -n $FZF_PREVIEW_COLUMNS ]]; then
+        batcat --color=always --style=plain --terminal-width=$FZF_PREVIEW_COLUMNS $readme
+    else
+        batcat --color=always --style=plain $readme
+    fi
+else
+    lsd -a --color=always $1
+fi
