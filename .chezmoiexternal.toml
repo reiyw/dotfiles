@@ -18,7 +18,6 @@ executable = true
 ["local/bin/ghq".filter]
 command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/ghq_linux_amd64.zip && unzip -p $tmpdir/ghq_linux_amd64.zip ghq_linux_amd64/ghq"]
-{{ end }}
 
 {{ $gitTownVersion := "7.8.0" }}
 ["local/bin/git-town"]
@@ -29,6 +28,7 @@ executable = true
 ["local/bin/git-town".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "git-town"]
+{{ end }}
 
 [".fzf"]
 type = "git-repo"
