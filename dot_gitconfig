@@ -3,6 +3,8 @@
 	email = reiyw.setuve@gmail.com
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
 [alias]
 	append = town append
 	hack = town hack
