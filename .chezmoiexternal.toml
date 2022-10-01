@@ -38,6 +38,17 @@ executable = true
 ["local/bin/just".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "just"]
+
+{{ $ghVersion := "2.16.1" }}
+["local/bin/gh"]
+type = "file"
+url = "https://github.com/cli/cli/releases/download/v{{ $ghVersion }}/gh_{{ $ghVersion }}_linux_amd64.tar.gz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/gh".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "gh_{{ $ghVersion }}_linux_amd64/bin/gh"]
+
 {{ end }}
 
 [".fzf"]
