@@ -8,16 +8,6 @@ executable = true
 ["local/bin/lsd".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "lsd-{{ $lsdVersion }}-i686-unknown-linux-musl/lsd"]
-
-{{ $nvimVersion := "0.8.0" }}
-["local/bin/nvim"]
-type = "file"
-url = "https://github.com/neovim/neovim/releases/download/v{{ $nvimVersion }}/nvim-linux64.tar.gz"
-refreshPeriod = "168h"
-executable = true
-["local/bin/nvim".filter]
-command = "tar"
-args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "nvim-linux64/bin/nvim"]
 {{ end }}
 
 [".fzf"]

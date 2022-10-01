@@ -13,6 +13,9 @@ sudo apt install -y \
     ripgrep \
     ;
 
+wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
+sudo apt install ./nvim-linux64.deb
+
 {{ else if eq .chezmoi.os "darwin" -}}
 
 #!/bin/bash
@@ -20,6 +23,7 @@ brew install \
     bat \
     fd \
     lsd \
+    neovim \
     ripgrep \
     ;
 $(brew --prefix)/opt/fzf/install
