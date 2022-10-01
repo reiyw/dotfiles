@@ -1,3 +1,10 @@
 README.md
+install.sh
+.devcontainer/
+
 .zcompdump
 *.local
+
+{{- if eq (env "REMOTE_CONTAINERS") "true" }}
+.gitconfig
+{{- end }}
