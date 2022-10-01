@@ -1,7 +1,7 @@
-{{- $codespaces:= env "CODESPACES" | not | not -}}
-{{- $remoteContainer:= env "REMOTE_CONTAINERS" | not | not -}}
+{{- $codespaces := env "CODESPACES" | not | not -}}
+{{- $remoteContainers := env "REMOTE_CONTAINERS" | not | not -}}
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
 codespaces = {{ $codespaces }}
-remoteContainer = {{ $remoteContainer }}
+remoteContainers = {{ $remoteContainers }}
