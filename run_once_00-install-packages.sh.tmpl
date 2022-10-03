@@ -7,11 +7,6 @@ sudo ()
     "$@"
 }
 
-sudo apt-get update
-sudo apt-get install -y \
-    ripgrep \
-    ;
-
 wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
 sudo apt-get install ./nvim-linux64.deb
 rm nvim-linux64.deb
