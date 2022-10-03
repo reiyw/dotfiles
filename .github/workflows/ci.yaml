@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         image:
-          - gcr.io/google-appengine/debian10
           - mcr.microsoft.com/vscode/devcontainers/base:debian-10
           - mcr.microsoft.com/vscode/devcontainers/base:debian-11
           - mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04
