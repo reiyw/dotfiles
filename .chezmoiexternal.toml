@@ -59,6 +59,16 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--xz", "--to-stdout", "shellcheck-v{{ $shellcheckVersion }}/shellcheck"]
 
+{{ $batVersion := "0.22.1" }}
+["local/bin/bat"]
+type = "file"
+url = "https://github.com/sharkdp/bat/releases/download/v{{ $batVersion }}/bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu.tar.gz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/bat".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu/bat"]
+
 {{ end }}
 
 [".fzf"]
