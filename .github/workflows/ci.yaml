@@ -10,13 +10,20 @@ on:
 
 jobs:
   install:
+    strategy:
+      matrix:
+        image:
+          - mcr.microsoft.com/vscode/devcontainers/base:debian
+          - mcr.microsoft.com/vscode/devcontainers/base:ubuntu
+          - marketplace.gcr.io/google/debian10
+          - marketplace.gcr.io/google/debian11
+          - marketplace.gcr.io/google/ubuntu2004
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
-      env:
-        CODESPACES: true
+      image: ${{ matrix.image }}
     steps:
       - uses: actions/checkout@v2
       - run: ./install.sh
+      - run: ./test.sh
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
