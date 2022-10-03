@@ -89,6 +89,16 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "ripgrep-{{ $rgVersion }}-x86_64-unknown-linux-musl/rg"]
 
+{{ $hyperfineVersion := "1.14.0" }}
+["local/bin/hyperfine"]
+type = "file"
+url = "https://github.com/sharkdp/hyperfine/releases/download/v{{ $hyperfineVersion }}/hyperfine-v{{ $hyperfineVersion }}-x86_64-unknown-linux-gnu.tar.gz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/hyperfine".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "hyperfine-v{{ $hyperfineVersion }}-x86_64-unknown-linux-gnu/hyperfine"]
+
 {{ end }}
 
 [".fzf"]
