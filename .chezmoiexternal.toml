@@ -69,6 +69,16 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu/bat"]
 
+{{ $fdVersion := "8.4.0" }}
+["local/bin/fd"]
+type = "file"
+url = "https://github.com/sharkdp/fd/releases/download/v{{ $fdVersion }}/fd-v{{ $fdVersion }}-x86_64-unknown-linux-gnu.tar.gz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/fd".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "fd-v{{ $fdVersion }}-x86_64-unknown-linux-gnu/fd"]
+
 {{ end }}
 
 [".fzf"]
