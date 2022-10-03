@@ -4,7 +4,7 @@ set -u
 source ~/.zshrc
 
 testing_commands=(
-    fzf
+    # fzf
     gh
     ghq
     git-town
