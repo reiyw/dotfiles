@@ -6,8 +6,8 @@ sudo () {
 }
 
 sudo apt-get update
-sudo apt-get install -y unzip wget
+sudo apt-get install -y unzip wget xz-utils
 {{ else if eq .chezmoi.os "darwin" -}}
 brew update
-brew install unzip wget
+brew install unzip wget xz
 {{ end -}}
