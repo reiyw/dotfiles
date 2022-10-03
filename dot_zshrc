@@ -65,4 +65,6 @@ source ~/local/zsh-keybindings.zsh
 
 [ -f ~/.cargo/env ] && source ~/.cargo/env
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
 eval "$(starship init zsh)"
