@@ -49,6 +49,16 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "gh_{{ $ghVersion }}_linux_amd64/bin/gh"]
 
+{{ $shellcheckVersion := "0.8.0" }}
+["local/bin/shellcheck"]
+type = "file"
+url = "https://github.com/koalaman/shellcheck/releases/download/v{{ $shellcheckVersion }}/shellcheck-v{{ $shellcheckVersion }}.linux.x86_64.tar.xz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/shellcheck".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--xz", "--to-stdout", "shellcheck-v{{ $shellcheckVersion }}/shellcheck"]
+
 {{ end }}
 
 [".fzf"]
