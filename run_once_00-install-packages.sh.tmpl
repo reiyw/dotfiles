@@ -7,9 +7,13 @@ sudo ()
     "$@"
 }
 
-wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
-sudo apt-get install ./nvim-linux64.deb
-rm nvim-linux64.deb
+if command -v nvim >/dev/null 2>&1; then 
+    echo "nvim already installed"
+else
+    wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
+    sudo apt-get install ./nvim-linux64.deb
+    rm nvim-linux64.deb
+fi
 
 {{ else if eq .chezmoi.os "darwin" -}}
 
