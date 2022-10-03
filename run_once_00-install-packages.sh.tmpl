@@ -7,7 +7,8 @@ sudo ()
     "$@"
 }
 
-sudo apt install -y \
+sudo apt-get update
+sudo apt-get install -y \
     bat \
     fd-find \
     ripgrep \
@@ -22,6 +23,7 @@ rm nvim-linux64.deb
 {{ else if eq .chezmoi.os "darwin" -}}
 
 #!/bin/bash
+brew update
 brew install \
     bat \
     fd \
