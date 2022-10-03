@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
-set -eu
+set -u
+
+source ~/.zshrc
 
 testing_commands=(
     fzf
