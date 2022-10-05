@@ -1,2 +1,4 @@
+export TZ='Asia/Tokyo'
+
 fpath=("$HOME/local/zsh-functions" $fpath)
 autoload -Uz readme-or-lsd
