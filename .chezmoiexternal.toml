@@ -106,6 +106,20 @@ url = "https://github.com/stedolan/jq/releases/download/jq-{{ $jqVersion }}/jq-l
 refreshPeriod = "168h"
 executable = true
 
+{{ $pueueVersion := "2.1.0" }}
+["local/bin/pueue"]
+type = "file"
+url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueueVersion }}/pueue-linux-x86_64"
+refreshPeriod = "168h"
+executable = true
+
+{{ $pueuedVersion := "2.1.0" }}
+["local/bin/pueued"]
+type = "file"
+url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/pueued-linux-x86_64"
+refreshPeriod = "168h"
+executable = true
+
 {{ end }}
 
 [".fzf"]
