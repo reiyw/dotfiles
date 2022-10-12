@@ -7,6 +7,11 @@ sudo ()
     "$@"
 }
 
+sudo apt-get update
+sudo apt-get install -y \
+    jo \
+    ;
+
 if command -v nvim >/dev/null 2>&1; then 
     echo "nvim already installed"
 else
@@ -23,6 +28,7 @@ brew install \
     bat \
     fd \
     jq \
+    jo \
     just \
     gh \
     ghq \
