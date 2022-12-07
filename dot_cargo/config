@@ -1,0 +1,5 @@
+# See https://github.com/rust-lang/cargo/issues/9167
+[net]
+git-fetch-with-cli = true
+[source.crates-io]
+registry = "git://github.com/rust-lang/crates.io-index.git"
