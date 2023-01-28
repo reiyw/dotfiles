@@ -130,6 +130,13 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "mold-{{ $moldVersion }}-x86_64-linux/bin/mold"]
 
+{{ $hadolintVersion := "2.12.0" }}
+["local/bin/hadolint"]
+type = "file"
+url = "https://github.com/hadolint/hadolint/releases/download/v{{ $hadolintVersion }}/hadolint-Linux-x86_64"
+refreshPeriod = "168h"
+executable = true
+
 {{ end }}
 
 [".fzf"]
