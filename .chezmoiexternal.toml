@@ -137,6 +137,16 @@ url = "https://github.com/hadolint/hadolint/releases/download/v{{ $hadolintVersi
 refreshPeriod = "168h"
 executable = true
 
+{{ $fnmVersion := "1.33.1" }}
+["local/bin/fnm"]
+type = "file"
+url = "https://github.com/Schniz/fnm/releases/download/v{{ $fnmVersion }}/fnm-linux.zip"
+refreshPeriod = "168h"
+executable = true
+["local/bin/fnm".filter]
+command = "bash"
+args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/fnm-linux.zip && unzip -p $tmpdir/fnm-linux.zip fnm"]
+
 {{ end }}
 
 [".fzf"]
