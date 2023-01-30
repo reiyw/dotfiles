@@ -69,4 +69,6 @@ source ~/local/zsh-keybindings.zsh
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
+eval "$(fnm env --use-on-cd)"
+
 eval "$(starship init zsh)"
