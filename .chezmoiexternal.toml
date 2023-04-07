@@ -147,11 +147,14 @@ executable = true
 command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/fnm-linux.zip && unzip -p $tmpdir/fnm-linux.zip fnm"]
 
-{{ end }}
-
-[".fzf"]
-type = "git-repo"
-url = "https://github.com/junegunn/fzf"
+{{ $fzfVersion := "0.39.0" }}
+["local/bin/fzf"]
+type = "file"
+url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-linux_amd64.tar.gz"
 refreshPeriod = "168h"
-[".fzf".clone]
-args = ["--depth", "1"]
+executable = true
+["local/bin/fzf".filter]
+command = "tar"
+args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "fzf"]
+
+{{ end }}

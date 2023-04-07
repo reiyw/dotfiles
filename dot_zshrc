@@ -62,8 +62,8 @@ HISTFILE="$HOME/.zsh_history"
 
 source ~/local/zsh-keybindings.zsh
 
-# fzf keybindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source "$HOME/local/fzf/completion.zsh" 2> /dev/null
+source "$HOME/local/fzf/key-bindings.zsh"
 
 [ -f ~/.cargo/env ] && source ~/.cargo/env
 
