@@ -68,4 +68,6 @@ source "$HOME/local/fzf/key-bindings.zsh"
 
 eval "$(fnm env --use-on-cd)"
 
+source <(jj util completion --zsh)
+
 eval "$(starship init zsh)"
