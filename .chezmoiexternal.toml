@@ -9,7 +9,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "lsd-{{ $lsdVersion }}-i686-unknown-linux-musl/lsd"]
 
-{{ $ghqVersion := "1.3.0" }}
+{{ $ghqVersion := "1.4.2" }}
 ["local/bin/ghq"]
 type = "file"
 url = "https://github.com/x-motemen/ghq/releases/download/v{{ $ghqVersion }}/ghq_linux_amd64.zip"
@@ -19,7 +19,7 @@ executable = true
 command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/ghq_linux_amd64.zip && unzip -p $tmpdir/ghq_linux_amd64.zip ghq_linux_amd64/ghq"]
 
-{{ $gitTownVersion := "7.8.0" }}
+{{ $gitTownVersion := "9.0.0" }}
 ["local/bin/git-town"]
 type = "file"
 url = "https://github.com/git-town/git-town/releases/download/v{{ $gitTownVersion }}/git-town_{{ $gitTownVersion }}_linux_intel_64.tar.gz"
@@ -29,7 +29,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "git-town"]
 
-{{ $justVersion := "1.5.0" }}
+{{ $justVersion := "1.14.0" }}
 ["local/bin/just"]
 type = "file"
 url = "https://github.com/casey/just/releases/download/{{ $justVersion }}/just-{{ $justVersion }}-x86_64-unknown-linux-musl.tar.gz"
@@ -39,7 +39,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "just"]
 
-{{ $ghVersion := "2.16.1" }}
+{{ $ghVersion := "2.32.0" }}
 ["local/bin/gh"]
 type = "file"
 url = "https://github.com/cli/cli/releases/download/v{{ $ghVersion }}/gh_{{ $ghVersion }}_linux_amd64.tar.gz"
@@ -49,7 +49,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "gh_{{ $ghVersion }}_linux_amd64/bin/gh"]
 
-{{ $shellcheckVersion := "0.8.0" }}
+{{ $shellcheckVersion := "0.9.0" }}
 ["local/bin/shellcheck"]
 type = "file"
 url = "https://github.com/koalaman/shellcheck/releases/download/v{{ $shellcheckVersion }}/shellcheck-v{{ $shellcheckVersion }}.linux.x86_64.tar.xz"
@@ -59,7 +59,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--xz", "--to-stdout", "shellcheck-v{{ $shellcheckVersion }}/shellcheck"]
 
-{{ $batVersion := "0.22.1" }}
+{{ $batVersion := "0.23.0" }}
 ["local/bin/bat"]
 type = "file"
 url = "https://github.com/sharkdp/bat/releases/download/v{{ $batVersion }}/bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu.tar.gz"
@@ -69,7 +69,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu/bat"]
 
-{{ $fdVersion := "8.4.0" }}
+{{ $fdVersion := "8.7.0" }}
 ["local/bin/fd"]
 type = "file"
 url = "https://github.com/sharkdp/fd/releases/download/v{{ $fdVersion }}/fd-v{{ $fdVersion }}-x86_64-unknown-linux-gnu.tar.gz"
@@ -89,7 +89,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "ripgrep-{{ $rgVersion }}-x86_64-unknown-linux-musl/rg"]
 
-{{ $hyperfineVersion := "1.14.0" }}
+{{ $hyperfineVersion := "1.17.0" }}
 ["local/bin/hyperfine"]
 type = "file"
 url = "https://github.com/sharkdp/hyperfine/releases/download/v{{ $hyperfineVersion }}/hyperfine-v{{ $hyperfineVersion }}-x86_64-unknown-linux-gnu.tar.gz"
@@ -106,21 +106,21 @@ url = "https://github.com/stedolan/jq/releases/download/jq-{{ $jqVersion }}/jq-l
 refreshPeriod = "168h"
 executable = true
 
-{{ $pueueVersion := "2.1.0" }}
+{{ $pueueVersion := "3.2.0" }}
 ["local/bin/pueue"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueueVersion }}/pueue-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
-{{ $pueuedVersion := "2.1.0" }}
+{{ $pueuedVersion := "3.2.0" }}
 ["local/bin/pueued"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/pueued-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
-{{ $moldVersion := "1.10.1" }}
+{{ $moldVersion := "1.11.0" }}
 ["local/bin/mold"]
 type = "file"
 url = "https://github.com/rui314/mold/releases/download/v{{ $moldVersion }}/mold-{{ $moldVersion }}-x86_64-linux.tar.gz"
@@ -137,7 +137,7 @@ url = "https://github.com/hadolint/hadolint/releases/download/v{{ $hadolintVersi
 refreshPeriod = "168h"
 executable = true
 
-{{ $fnmVersion := "1.33.1" }}
+{{ $fnmVersion := "1.35.0" }}
 ["local/bin/fnm"]
 type = "file"
 url = "https://github.com/Schniz/fnm/releases/download/v{{ $fnmVersion }}/fnm-linux.zip"
@@ -147,7 +147,7 @@ executable = true
 command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/fnm-linux.zip && unzip -p $tmpdir/fnm-linux.zip fnm"]
 
-{{ $fzfVersion := "0.39.0" }}
+{{ $fzfVersion := "0.42.0" }}
 ["local/bin/fzf"]
 type = "file"
 url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-linux_amd64.tar.gz"
