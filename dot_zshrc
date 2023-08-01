@@ -70,4 +70,6 @@ eval "$(fnm env --use-on-cd)"
 
 source <(jj util completion --zsh)
 
+[ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
+
 eval "$(starship init zsh)"
