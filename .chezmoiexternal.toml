@@ -167,4 +167,14 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "./jj"]
 
+{{ $ryeVersion := "0.8.0" }}
+["local/bin/rye"]
+type = "file"
+url = "https://github.com/mitsuhiko/rye/releases/download/{{ $ryeVersion }}/rye-x86_64-linux.gz"
+refreshPeriod = "168h"
+executable = true
+["local/bin/rye".filter]
+command = "gunzip"
+args = ["--decompress", "--stdout"]
+
 {{ end }}
