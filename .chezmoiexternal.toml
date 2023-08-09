@@ -167,7 +167,7 @@ executable = true
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "./jj"]
 
-{{ $ryeVersion := "0.8.0" }}
+{{ $ryeVersion := "0.11.0" }}
 ["local/bin/rye"]
 type = "file"
 url = "https://github.com/mitsuhiko/rye/releases/download/{{ $ryeVersion }}/rye-x86_64-linux.gz"
