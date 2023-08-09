@@ -59,6 +59,10 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
 
+# Tell the location of the terminfo database to the python-build-standalone Python.
+# https://gregoryszorc.com/docs/python-build-standalone/main/quirks.html#backspace-key-doesn-t-work-in-python-repl
+export TERMINFO_DIRS=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
+
 source ~/local/zsh-keybindings.zsh
 
 source "$HOME/local/fzf/completion.zsh" 2> /dev/null
