@@ -1,179 +1,179 @@
 {{ if eq .chezmoi.os "linux" }}
 {{ $lsdVersion := "0.23.1" }}
-["local/bin/lsd"]
+[".local/bin/lsd"]
 type = "file"
 url = "https://github.com/Peltoche/lsd/releases/download/{{ $lsdVersion }}/lsd-{{ $lsdVersion }}-i686-unknown-linux-musl.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/lsd".filter]
+[".local/bin/lsd".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "lsd-{{ $lsdVersion }}-i686-unknown-linux-musl/lsd"]
 
 {{ $ghqVersion := "1.4.2" }}
-["local/bin/ghq"]
+[".local/bin/ghq"]
 type = "file"
 url = "https://github.com/x-motemen/ghq/releases/download/v{{ $ghqVersion }}/ghq_linux_amd64.zip"
 refreshPeriod = "168h"
 executable = true
-["local/bin/ghq".filter]
+[".local/bin/ghq".filter]
 command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/ghq_linux_amd64.zip && unzip -p $tmpdir/ghq_linux_amd64.zip ghq_linux_amd64/ghq"]
 
 {{ $gitTownVersion := "9.0.0" }}
-["local/bin/git-town"]
+[".local/bin/git-town"]
 type = "file"
 url = "https://github.com/git-town/git-town/releases/download/v{{ $gitTownVersion }}/git-town_{{ $gitTownVersion }}_linux_intel_64.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/git-town".filter]
+[".local/bin/git-town".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "git-town"]
 
 {{ $justVersion := "1.14.0" }}
-["local/bin/just"]
+[".local/bin/just"]
 type = "file"
 url = "https://github.com/casey/just/releases/download/{{ $justVersion }}/just-{{ $justVersion }}-x86_64-unknown-linux-musl.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/just".filter]
+[".local/bin/just".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "just"]
 
 {{ $ghVersion := "2.32.0" }}
-["local/bin/gh"]
+[".local/bin/gh"]
 type = "file"
 url = "https://github.com/cli/cli/releases/download/v{{ $ghVersion }}/gh_{{ $ghVersion }}_linux_amd64.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/gh".filter]
+[".local/bin/gh".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "gh_{{ $ghVersion }}_linux_amd64/bin/gh"]
 
 {{ $shellcheckVersion := "0.9.0" }}
-["local/bin/shellcheck"]
+[".local/bin/shellcheck"]
 type = "file"
 url = "https://github.com/koalaman/shellcheck/releases/download/v{{ $shellcheckVersion }}/shellcheck-v{{ $shellcheckVersion }}.linux.x86_64.tar.xz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/shellcheck".filter]
+[".local/bin/shellcheck".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--xz", "--to-stdout", "shellcheck-v{{ $shellcheckVersion }}/shellcheck"]
 
 {{ $batVersion := "0.23.0" }}
-["local/bin/bat"]
+[".local/bin/bat"]
 type = "file"
 url = "https://github.com/sharkdp/bat/releases/download/v{{ $batVersion }}/bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/bat".filter]
+[".local/bin/bat".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "bat-v{{ $batVersion }}-x86_64-unknown-linux-gnu/bat"]
 
 {{ $fdVersion := "8.7.0" }}
-["local/bin/fd"]
+[".local/bin/fd"]
 type = "file"
 url = "https://github.com/sharkdp/fd/releases/download/v{{ $fdVersion }}/fd-v{{ $fdVersion }}-x86_64-unknown-linux-gnu.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/fd".filter]
+[".local/bin/fd".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "fd-v{{ $fdVersion }}-x86_64-unknown-linux-gnu/fd"]
 
 {{ $rgVersion := "13.0.0" }}
-["local/bin/rg"]
+[".local/bin/rg"]
 type = "file"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/{{ $rgVersion }}/ripgrep-{{ $rgVersion }}-x86_64-unknown-linux-musl.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/rg".filter]
+[".local/bin/rg".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "ripgrep-{{ $rgVersion }}-x86_64-unknown-linux-musl/rg"]
 
 {{ $hyperfineVersion := "1.17.0" }}
-["local/bin/hyperfine"]
+[".local/bin/hyperfine"]
 type = "file"
 url = "https://github.com/sharkdp/hyperfine/releases/download/v{{ $hyperfineVersion }}/hyperfine-v{{ $hyperfineVersion }}-x86_64-unknown-linux-gnu.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/hyperfine".filter]
+[".local/bin/hyperfine".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "hyperfine-v{{ $hyperfineVersion }}-x86_64-unknown-linux-gnu/hyperfine"]
 
 {{ $jqVersion := "1.6" }}
-["local/bin/jq"]
+[".local/bin/jq"]
 type = "file"
 url = "https://github.com/stedolan/jq/releases/download/jq-{{ $jqVersion }}/jq-linux64"
 refreshPeriod = "168h"
 executable = true
 
 {{ $pueueVersion := "3.2.0" }}
-["local/bin/pueue"]
+[".local/bin/pueue"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueueVersion }}/pueue-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
 {{ $pueuedVersion := "3.2.0" }}
-["local/bin/pueued"]
+[".local/bin/pueued"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/pueued-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
 {{ $moldVersion := "2.0.0" }}
-["local/bin/mold"]
+[".local/bin/mold"]
 type = "file"
 url = "https://github.com/rui314/mold/releases/download/v{{ $moldVersion }}/mold-{{ $moldVersion }}-x86_64-linux.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/mold".filter]
+[".local/bin/mold".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "mold-{{ $moldVersion }}-x86_64-linux/bin/mold"]
 
 {{ $hadolintVersion := "2.12.0" }}
-["local/bin/hadolint"]
+[".local/bin/hadolint"]
 type = "file"
 url = "https://github.com/hadolint/hadolint/releases/download/v{{ $hadolintVersion }}/hadolint-Linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
 {{ $fnmVersion := "1.35.0" }}
-["local/bin/fnm"]
+[".local/bin/fnm"]
 type = "file"
 url = "https://github.com/Schniz/fnm/releases/download/v{{ $fnmVersion }}/fnm-linux.zip"
 refreshPeriod = "168h"
 executable = true
-["local/bin/fnm".filter]
+[".local/bin/fnm".filter]
 command = "bash"
 args = ["-c", "tmpdir=$(mktemp -d); cat > $tmpdir/fnm-linux.zip && unzip -p $tmpdir/fnm-linux.zip fnm"]
 
 {{ $fzfVersion := "0.42.0" }}
-["local/bin/fzf"]
+[".local/bin/fzf"]
 type = "file"
 url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-linux_amd64.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/fzf".filter]
+[".local/bin/fzf".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "fzf"]
 
 {{ $jjVersion := "0.8.0" }}
-["local/bin/jj"]
+[".local/bin/jj"]
 type = "file"
 url = "https://github.com/martinvonz/jj/releases/download/v{{ $jjVersion }}/jj-v{{ $jjVersion }}-x86_64-unknown-linux-musl.tar.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/jj".filter]
+[".local/bin/jj".filter]
 command = "tar"
 args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "./jj"]
 
 {{ $ryeVersion := "0.11.0" }}
-["local/bin/rye"]
+[".local/bin/rye"]
 type = "file"
 url = "https://github.com/mitsuhiko/rye/releases/download/{{ $ryeVersion }}/rye-x86_64-linux.gz"
 refreshPeriod = "168h"
 executable = true
-["local/bin/rye".filter]
+[".local/bin/rye".filter]
 command = "gunzip"
 args = ["--decompress", "--stdout"]
 
