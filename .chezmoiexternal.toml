@@ -153,4 +153,10 @@ refreshPeriod = "168h"
 stripComponents = 1
 path = "delta"
 
+{{ $zimVersion := "1.12.0" }}
+[".zim/zimfw.zsh"]
+type = "file"
+url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
+refreshPeriod = "168h"
+
 {{ end }}
