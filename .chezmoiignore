@@ -4,7 +4,6 @@ install.sh
 .github/
 
 .zcompdump
-*.local
 
 {{- if .remoteContainers }}
 .gitconfig
