@@ -2,6 +2,8 @@
 # Modules
 #
 
+# Provides archive and unarchive functions for easy archive manipulation.
+zmodule archive
 # Sets sane Zsh built-in environment options.
 zmodule environment
 # Configures fzf for faster fetching of files and directories names.
