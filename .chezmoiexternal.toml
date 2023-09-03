@@ -159,4 +159,18 @@ type = "file"
 url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
 refreshPeriod = "168h"
 
+{{ $helixVersion := "23.05" }}
+[".local/bin/hx"]
+type = "archive-file"
+url = "https://github.com/helix-editor/helix/releases/download/{{ $helixVersion }}/helix-{{ $helixVersion }}-x86_64-linux.tar.xz"
+refreshPeriod = "168h"
+stripComponents = 1
+path = "hx"
+[".config/helix/runtime"]
+type = "archive"
+url = "https://github.com/helix-editor/helix/releases/download/{{ $helixVersion }}/helix-{{ $helixVersion }}-x86_64-linux.tar.xz"
+refreshPeriod = "168h"
+stripComponents = 2
+include = ["*/runtime/**"]
+
 {{ end }}

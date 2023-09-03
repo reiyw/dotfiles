@@ -57,6 +57,8 @@ export HISTSIZE=1000000000
 # https://gregoryszorc.com/docs/python-build-standalone/main/quirks.html#backspace-key-doesn-t-work-in-python-repl
 export TERMINFO_DIRS=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
 
+export EDITOR="hx"
+
 source ~/.local/zsh-keybindings.zsh
 
 source "$HOME/.local/fzf/completion.zsh" 2> /dev/null
