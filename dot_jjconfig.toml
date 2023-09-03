@@ -1,3 +1,6 @@
 [user]
 name = "Ryo Takahashi"
 email = "reiyw.setuve@gmail.com"
+
+[ui]
+diff-editor = ["scm-diff-editor", "--dir-diff", "$left", "$right"]
