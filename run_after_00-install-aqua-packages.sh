@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-aqua install --only-link
+$HOME/.local/share/aquaproj-aqua/bin/aqua install --only-link
