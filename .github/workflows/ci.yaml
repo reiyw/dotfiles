@@ -26,5 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: ./install.sh
+        env:
+          AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
