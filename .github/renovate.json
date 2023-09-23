@@ -1,7 +1,7 @@
 {
     "extends": [
       "github>aquaproj/aqua-renovate-config#1.10.0",
-      "schedule:automergeEarlyMondays",
-      ":automergePatch"
+      ":automergeMinor",
+      ":automergeRequireAllStatusChecks"
     ]
 }
