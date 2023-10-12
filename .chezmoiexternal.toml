@@ -49,4 +49,11 @@ refreshPeriod = "168h"
 stripComponents = 2
 include = ["*/runtime/**"]
 
+{{ $bazeliskVersion := "1.18.0" }}
+[".local/bin/bazel"]
+type = "file"
+url = "https://github.com/bazelbuild/bazelisk/releases/download/v{{ $bazeliskVersion }}/bazelisk-linux-amd64"
+refreshPeriod = "168h"
+executable = true
+
 {{ end }}
