@@ -63,4 +63,12 @@ url = "https://github.com/aspect-build/aspect-cli/releases/download/{{ $aspectVe
 refreshPeriod = "168h"
 executable = true
 
+# https://github.com/bazelbuild/buildtools/releases/download/v6.3.3/buildifier-linux-amd64
+{{ $buildifierVersion := "6.3.3" }}
+[".local/bin/buildifier"]
+type = "file"
+url = "https://github.com/bazelbuild/buildtools/releases/download/v{{ $buildifierVersion }}/buildifier-linux-amd64"
+refreshPeriod = "168h"
+executable = true
+
 {{ end }}
