@@ -27,4 +27,5 @@ packages:
 - name: sharkdp/bat@v0.24.0
 - name: sharkdp/fd@v8.7.1
 - name: sharkdp/hyperfine@v1.18.0
+- name: wagoodman/dive@v0.11.0
 - name: x-motemen/ghq@v1.4.2
