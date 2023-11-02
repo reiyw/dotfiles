@@ -56,7 +56,7 @@ url = "https://github.com/bazelbuild/bazelisk/releases/download/v{{ $bazeliskVer
 refreshPeriod = "168h"
 executable = true
 
-{{ $aspectVersion := "5.8.0" }}
+{{ $aspectVersion := "5.8.5" }}
 [".local/bin/aspect"]
 type = "file"
 url = "https://github.com/aspect-build/aspect-cli/releases/download/{{ $aspectVersion }}/aspect-linux_amd64"
