@@ -8,7 +8,7 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.79.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.80.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: BurntSushi/ripgrep@13.0.0
 - name: Byron/dua-cli@v2.20.1
