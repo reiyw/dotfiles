@@ -71,4 +71,11 @@ url = "https://github.com/bazelbuild/buildtools/releases/download/v{{ $buildifie
 refreshPeriod = "168h"
 executable = true
 
+{{ $qvVersion := "0.8.4" }}
+[".local/bin/qv"]
+type = "archive-file"
+url = "https://github.com/timvw/qv/releases/download/v{{ $qvVersion }}/qv-{{ $qvVersion }}-x86_64-unknown-linux-gnu-generic.tar.gz"
+refreshPeriod = "168h"
+path = "qv"
+
 {{ end }}
