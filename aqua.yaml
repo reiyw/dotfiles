@@ -10,7 +10,7 @@ registries:
 - type: standard
   ref: v4.92.2 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: BurntSushi/ripgrep@13.0.0
+- name: BurntSushi/ripgrep@14.0.2
 - name: Byron/dua-cli@v2.20.3
 - name: casey/just@1.16.0
 - name: cli/cli@v2.39.2
