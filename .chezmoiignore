@@ -8,3 +8,7 @@ install.sh
 {{- if .remoteContainers }}
 .gitconfig
 {{- end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+.config/karabiner/karabiner.json
+{{- end }}
