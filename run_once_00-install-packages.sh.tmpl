@@ -25,9 +25,10 @@ fi
 #!/bin/bash
 brew update
 brew bundle --no-lock --file=/dev/stdin <<EOF
-brew "espanso/espanso/espanso"
+tap "espanso/espanso"
 brew "coreutils"
 brew "curl"
+brew "espanso"
 brew "findutils"
 brew "git"
 brew "koekeishiya/formulae/skhd"
