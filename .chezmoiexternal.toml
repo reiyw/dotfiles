@@ -1,3 +1,9 @@
+{{ $zimVersion := "1.12.0" }}
+[".zim/zimfw.zsh"]
+type = "file"
+url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
+refreshPeriod = "168h"
+
 {{ if eq .chezmoi.os "linux" }}
 
 {{ $pueueVersion := "3.2.0" }}
@@ -28,12 +34,6 @@ type = "archive-file"
 url = "https://github.com/martinvonz/jj/releases/download/v{{ $jjVersion }}/jj-v{{ $jjVersion }}-x86_64-unknown-linux-musl.tar.gz"
 refreshPeriod = "168h"
 path = "./jj"
-
-{{ $zimVersion := "1.12.0" }}
-[".zim/zimfw.zsh"]
-type = "file"
-url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
-refreshPeriod = "168h"
 
 {{ $helixVersion := "23.05" }}
 [".local/bin/hx"]
