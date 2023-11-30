@@ -23,6 +23,8 @@ fi
 {{ else if eq .chezmoi.os "darwin" -}}
 
 #!/bin/bash
+tap "espanso/espanso"
+tap "koekeishiya/formulae"
 brew update
 brew bundle --no-lock --file=/dev/stdin <<EOF
 brew "coreutils"
