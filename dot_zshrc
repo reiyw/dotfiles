@@ -71,7 +71,7 @@ source "$HOME/.local/fzf/key-bindings.zsh"
 
 eval "$(fnm env --use-on-cd)"
 
-source <(jj util completion --zsh)
+# source <(jj util completion --zsh)
 
 [ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
 
