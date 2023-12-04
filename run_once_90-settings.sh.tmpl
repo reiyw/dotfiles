@@ -21,4 +21,7 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 # Show hidden files in Finder
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
+# Disable mouse acceleration
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
 {{ end -}}
