@@ -48,7 +48,8 @@ alias lt='ls --tree'
 {{ if eq .chezmoi.os "linux" -}}
 export LC_ALL=C.UTF-8
 {{ else if eq .chezmoi.os "darwin" -}}
-export LC_ALL=en_US.UTF-8
+export LANG=C
+export LC_CTYPE=en_US.UTF-8
 {{- end }}
 
 export PATH="$HOME/.local/bin:$PATH"
