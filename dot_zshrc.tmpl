@@ -45,7 +45,11 @@ alias l='ls -la'
 alias la='ls -a'
 alias lt='ls --tree'
 
+{{ if eq .chezmoi.os "linux" -}}
 export LC_ALL=C.UTF-8
+{{ else if eq .chezmoi.os "darwin" -}}
+export LC_ALL=en_US.UTF-8
+{{- end }}
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
