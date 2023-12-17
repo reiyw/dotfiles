@@ -1,0 +1,76 @@
+# Files beginning with a . be matched without explicitly specifying the dot.
+setopt GLOBDOTS
+
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
+
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+# Use degit instead of git as the default tool to install and update modules.
+zstyle ':zim:zmodule' use 'degit'
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+    source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
+
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+zmodload -F zsh/terminfo +p:terminfo
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+
+alias b=bat
+alias ls='lsd'
+alias l='ls -la'
+alias la='ls -a'
+alias lt='ls --tree'
+
+export LC_ALL=C.UTF-8
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+
+export HISTFILE="$HOME/.zsh_history"
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+
+# Tell the location of the terminfo database to the python-build-standalone Python.
+# https://gregoryszorc.com/docs/python-build-standalone/main/quirks.html#backspace-key-doesn-t-work-in-python-repl
+export TERMINFO_DIRS=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
+
+export EDITOR="hx"
+
+source ~/.local/zsh-keybindings.zsh
+
+source "$HOME/.local/fzf/completion.zsh" 2> /dev/null
+source "$HOME/.local/fzf/key-bindings.zsh"
+
+[ -f ~/.cargo/env ] && source ~/.cargo/env
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+eval "$(fnm env --use-on-cd)"
+
+[ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
+
+eval "$(starship init zsh)"

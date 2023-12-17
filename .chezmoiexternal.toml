@@ -28,13 +28,6 @@ refreshPeriod = "168h"
 stripComponents = 1
 path = "bin/mold"
 
-{{ $jjVersion := "0.8.0" }}
-[".local/bin/jj"]
-type = "archive-file"
-url = "https://github.com/martinvonz/jj/releases/download/v{{ $jjVersion }}/jj-v{{ $jjVersion }}-x86_64-unknown-linux-musl.tar.gz"
-refreshPeriod = "168h"
-path = "./jj"
-
 {{ $helixVersion := "23.05" }}
 [".local/bin/hx"]
 type = "archive-file"
