@@ -1,7 +1,11 @@
 {
-    "extends": [
-      "github>aquaproj/aqua-renovate-config#1.13.0",
-      ":automergeMinor",
-      ":automergeRequireAllStatusChecks"
-    ]
+  "extends": [
+    "github>aquaproj/aqua-renovate-config#1.13.0",
+    ":automergeMinor",
+    ":automergeRequireAllStatusChecks"
+  ],
+  "timezone": "Asia/Tokyo",
+  "schedule": [
+    "before 4am on Monday"
+  ]
 }
