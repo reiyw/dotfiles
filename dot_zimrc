@@ -13,6 +13,8 @@ zmodule git
 # Applies correct bindkeys for input events.
 zmodule input
 
+zmodule ahmetb/kubectl-aliases --source .kubectl_aliases
+
 #
 # Completion
 #
