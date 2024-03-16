@@ -25,7 +25,7 @@ packages:
 - name: jqlang/jq@jq-1.7.1
 - name: junegunn/fzf@0.47.0
 - name: koalaman/shellcheck@v0.10.0
-- name: kubernetes/kubectl@v1.29.2
+- name: kubernetes/kubectl@v1.29.3
 - name: lsd-rs/lsd@v1.0.0
 - name: mitsuhiko/rye@0.28.0
 - name: mvdan/sh@v3.8.0
