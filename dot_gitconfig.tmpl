@@ -28,8 +28,14 @@
 [diff]
 	colorMoved = default
 [credential "https://github.com"]
-	helper = 
+{{- if .remoteContainers }}
+	helper = /home/vscode/.local/share/aquaproj-aqua/bin/gh auth git-credential
+{{- else }}
 	helper = !{{ .chezmoi.homeDir }}/.local/share/aquaproj-aqua/bin/gh auth git-credential
+{{- end }}
 [credential "https://gist.github.com"]
-	helper = 
+{{- if .remoteContainers }}
+	helper = /home/vscode/.local/share/aquaproj-aqua/bin/gh auth git-credential
+{{- else }}
 	helper = !{{ .chezmoi.homeDir }}/.local/share/aquaproj-aqua/bin/gh auth git-credential
+{{- end }}
