@@ -78,6 +78,6 @@ eval "$(fnm env --use-on-cd)"
 
 [ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
 
-[ -f "$HOME/.local/share/git-subrepo" ] && source "$HOME/.local/share/git-subrepo/.rc"
+[ -e "$HOME/.local/share/git-subrepo" ] && source "$HOME/.local/share/git-subrepo/.rc"
 
 eval "$(starship init zsh)"
