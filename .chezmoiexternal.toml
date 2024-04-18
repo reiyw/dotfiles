@@ -4,6 +4,11 @@ type = "file"
 url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
 refreshPeriod = "168h"
 
+[".local/share/git-subrepo"]
+type = "git-repo"
+url = "https://github.com/ingydotnet/git-subrepo.git"
+refreshPeriod = "168h"
+
 {{ if eq .chezmoi.os "linux" }}
 
 {{ $pueueVersion := "3.3.3" }}
