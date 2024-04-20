@@ -11,14 +11,14 @@ refreshPeriod = "168h"
 
 {{ if eq .chezmoi.os "linux" }}
 
-{{ $pueueVersion := "3.3.3" }}
+{{ $pueueVersion := "3.4.0" }}
 [".local/bin/pueue"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueueVersion }}/pueue-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
-{{ $pueuedVersion := "3.3.3" }}
+{{ $pueuedVersion := "3.4.0" }}
 [".local/bin/pueued"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/pueued-linux-x86_64"
