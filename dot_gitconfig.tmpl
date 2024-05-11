@@ -1,6 +1,7 @@
 [user]
 	name = Ryo Takahashi
 	email = reiyw.setuve@gmail.com
+	signingkey = 74844E5278975B91
 [pull]
 	ff = only
 [init]
@@ -27,6 +28,8 @@
 	conflictstyle = diff3
 [diff]
 	colorMoved = default
+[commit]
+	gpgsign = true
 [credential "https://github.com"]
 {{- if .remoteContainers }}
 	helper = /home/vscode/.local/share/aquaproj-aqua/bin/gh auth git-credential
