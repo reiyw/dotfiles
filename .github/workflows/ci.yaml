@@ -25,17 +25,21 @@ jobs:
       image: ${{ matrix.image }}
     steps:
       - uses: actions/checkout@v4
+      - run: npm install -g @bitwarden/cli
       - run: ./install.sh
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
+          BW_SESSION: ${{ secrets.BW_SESSION }}
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
   install-macos:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+      - run: npm install -g @bitwarden/cli
       - run: ./install.sh
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
+          BW_SESSION: ${{ secrets.BW_SESSION }}
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
