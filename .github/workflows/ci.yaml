@@ -12,13 +12,29 @@ jobs:
   install-ubuntu:
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-20.04, macos-latest]
-    runs-on: ${{ matrix.os }}
+        image:
+          # For the full list of images, see:
+          # https://hub.docker.com/_/microsoft-vscode-devcontainers
+          - mcr.microsoft.com/vscode/devcontainers/base:debian-10
+          - mcr.microsoft.com/vscode/devcontainers/base:debian-11
+          - mcr.microsoft.com/vscode/devcontainers/base:debian-12
+          - mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04
+          - mcr.microsoft.com/vscode/devcontainers/base:ubuntu-21.04
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
     steps:
       - uses: actions/checkout@v4
-      - run: npm install -g @bitwarden/cli
-      - run: echo "${{ secrets.BW_CLIENT_ID }}\n${{ secrets.BW_CLIENT_SECRET }}" | bw login --apikey --quiet
-      - run: export BW_SESSION=$(echo ${{ secrets.BW_PASSWORD }} | bw unlock --raw --quiet) && ./install.sh
+      - run: ./install.sh
+        env:
+          AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
+      - name: chezmoi data
+        run: '"$HOME/.local/bin/chezmoi" data'
+  install-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./install.sh
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
       - name: chezmoi data
