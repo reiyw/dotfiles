@@ -17,8 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm install -g @bitwarden/cli
-      - run: echo "${{ secrets.BW_CLIENT_ID }}\n${{ secrets.BW_CLIENT_SECRET }}" | bw login --apikey
-      - run: export BW_SESSION=$(echo ${{ secrets.BW_PASSWORD }} | bw login --raw) && ./install.sh
+      - run: echo "${{ secrets.BW_CLIENT_ID }}\n${{ secrets.BW_CLIENT_SECRET }}" | bw login --apikey --quiet
+      - run: export BW_SESSION=$(echo ${{ secrets.BW_PASSWORD }} | bw unlock --raw --quiet) && ./install.sh
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
       - name: chezmoi data
