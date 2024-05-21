@@ -42,3 +42,7 @@
 {{- else }}
 	helper = !{{ .chezmoi.homeDir }}/.local/share/aquaproj-aqua/bin/gh auth git-credential
 {{- end }}
+{{- if ne .chezmoi.os "darwin" }}
+[gpg]
+	program = /opt/homebrew/bin/gpg
+{{- end }}
