@@ -54,13 +54,6 @@ url = "https://github.com/bazelbuild/bazelisk/releases/download/v{{ $bazeliskVer
 refreshPeriod = "168h"
 executable = true
 
-{{ $aspectVersion := "5.8.5" }}
-[".local/bin/aspect"]
-type = "file"
-url = "https://github.com/aspect-build/aspect-cli/releases/download/{{ $aspectVersion }}/aspect-linux_amd64"
-refreshPeriod = "168h"
-executable = true
-
 # https://github.com/bazelbuild/buildtools/releases/download/v6.3.3/buildifier-linux-amd64
 {{ $buildifierVersion := "6.3.3" }}
 [".local/bin/buildifier"]
