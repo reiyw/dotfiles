@@ -24,7 +24,7 @@ packages:
 - name: helix-editor/helix@23.05
 - name: helm/helm@v3.15.3
 - name: jqlang/jq@jq-1.7.1
-- name: junegunn/fzf@0.53.0
+- name: junegunn/fzf@v0.54.0
 - name: koalaman/shellcheck@v0.10.0
 - name: kubernetes/kubectl@v1.30.2
 - name: lsd-rs/lsd@v1.1.2
