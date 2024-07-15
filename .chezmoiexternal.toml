@@ -25,7 +25,7 @@ url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/
 refreshPeriod = "168h"
 executable = true
 
-{{ $moldVersion := "2.4.1" }}
+{{ $moldVersion := "2.32.1" }}
 [".local/bin/mold"]
 type = "archive-file"
 url = "https://github.com/rui314/mold/releases/download/v{{ $moldVersion }}/mold-{{ $moldVersion }}-x86_64-linux.tar.gz"
