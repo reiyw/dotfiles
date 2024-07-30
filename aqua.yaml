@@ -11,7 +11,7 @@ registries:
   ref: v4.208.1 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: astral-sh/rye@0.37.0
-- name: bufbuild/buf@v1.34.0
+- name: bufbuild/buf@v1.35.1
 - name: BurntSushi/ripgrep@14.1.0
 - name: Byron/dua-cli@v2.29.0
 - name: casey/just@1.32.0
