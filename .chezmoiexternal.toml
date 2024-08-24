@@ -1,4 +1,4 @@
-{{ $zimVersion := "1.12.1" }}
+{{ $zimVersion := "1.14.0" }}
 [".zim/zimfw.zsh"]
 type = "file"
 url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
@@ -11,21 +11,21 @@ refreshPeriod = "168h"
 
 {{ if eq .chezmoi.os "linux" }}
 
-{{ $pueueVersion := "3.4.0" }}
+{{ $pueueVersion := "3.4.1" }}
 [".local/bin/pueue"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueueVersion }}/pueue-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
-{{ $pueuedVersion := "3.4.0" }}
+{{ $pueuedVersion := "3.4.1" }}
 [".local/bin/pueued"]
 type = "file"
 url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/pueued-linux-x86_64"
 refreshPeriod = "168h"
 executable = true
 
-{{ $moldVersion := "2.32.1" }}
+{{ $moldVersion := "2.33.0" }}
 [".local/bin/mold"]
 type = "archive-file"
 url = "https://github.com/rui314/mold/releases/download/v{{ $moldVersion }}/mold-{{ $moldVersion }}-x86_64-linux.tar.gz"
@@ -33,7 +33,7 @@ refreshPeriod = "168h"
 stripComponents = 1
 path = "bin/mold"
 
-{{ $helixVersion := "23.05" }}
+{{ $helixVersion := "24.07" }}
 [".local/bin/hx"]
 type = "archive-file"
 url = "https://github.com/helix-editor/helix/releases/download/{{ $helixVersion }}/helix-{{ $helixVersion }}-x86_64-linux.tar.xz"
@@ -47,7 +47,7 @@ refreshPeriod = "168h"
 stripComponents = 2
 include = ["*/runtime/**"]
 
-{{ $bazeliskVersion := "1.18.0" }}
+{{ $bazeliskVersion := "1.20.0" }}
 [".local/bin/bazel"]
 type = "file"
 url = "https://github.com/bazelbuild/bazelisk/releases/download/v{{ $bazeliskVersion }}/bazelisk-linux-amd64"
@@ -55,7 +55,7 @@ refreshPeriod = "168h"
 executable = true
 
 # https://github.com/bazelbuild/buildtools/releases/download/v6.3.3/buildifier-linux-amd64
-{{ $buildifierVersion := "6.3.3" }}
+{{ $buildifierVersion := "7.1.2" }}
 [".local/bin/buildifier"]
 type = "file"
 url = "https://github.com/bazelbuild/buildtools/releases/download/v{{ $buildifierVersion }}/buildifier-linux-amd64"
