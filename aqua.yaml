@@ -18,7 +18,7 @@ packages:
 - name: casey/just@1.34.0
 - name: cli/cli@v2.54.0
 - name: dalance/procs@v0.14.6
-- name: dandavison/delta@0.18.0
+- name: dandavison/delta@0.18.1
 - name: git-town/git-town@v15.1.0
 - name: golang/go@go1.23.0
 - name: google/yamlfmt@v0.13.0
