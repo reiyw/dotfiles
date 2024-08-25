@@ -15,7 +15,6 @@ jobs:
         image:
           # For the full list of images, see:
           # https://hub.docker.com/_/microsoft-vscode-devcontainers
-          - mcr.microsoft.com/vscode/devcontainers/base:debian-10
           - mcr.microsoft.com/vscode/devcontainers/base:debian-11
           - mcr.microsoft.com/vscode/devcontainers/base:debian-12
           - mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04
