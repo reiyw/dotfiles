@@ -27,8 +27,8 @@ jobs:
       - run: ./install.sh
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
-      - name: chezmoi data
-        run: '"$HOME/.local/bin/chezmoi" data'
+      - name: chezmoi doctor
+        run: '"$HOME/.local/bin/chezmoi" doctor'
   install-macos:
     runs-on: macos-latest
     steps:
@@ -36,5 +36,5 @@ jobs:
       - run: ./install.sh
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
-      - name: chezmoi data
-        run: '"$HOME/.local/bin/chezmoi" data'
+      - name: chezmoi doctor
+        run: '"$HOME/.local/bin/chezmoi" doctor'
