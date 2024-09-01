@@ -28,7 +28,9 @@ jobs:
         env:
           AQUA_GITHUB_TOKEN: ${{ secrets.AQUA_GITHUB_TOKEN }}
       - name: chezmoi doctor
-        run: '"$HOME/.local/bin/chezmoi" doctor'
+        run: |
+          git config --global --add safe.directory /__w/dotfiles/dotfiles
+          "$HOME/.local/bin/chezmoi" doctor
   install-macos:
     runs-on: macos-latest
     steps:
