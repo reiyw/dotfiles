@@ -12,7 +12,7 @@ registries:
 packages:
 - name: astral-sh/rye@0.39.0
 - name: astral-sh/uv@0.4.10
-- name: bufbuild/buf@v1.40.1
+- name: bufbuild/buf@v1.41.0
 - name: BurntSushi/ripgrep@14.1.1
 - name: Byron/dua-cli@v2.29.2
 - name: casey/just@1.35.0
