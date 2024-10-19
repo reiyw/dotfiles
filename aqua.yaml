@@ -8,7 +8,7 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.236.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.237.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: astral-sh/rye@0.41.0
 - name: astral-sh/uv@0.4.24
