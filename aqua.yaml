@@ -28,7 +28,7 @@ packages:
 - name: helm/helm@v3.16.3
 - name: jesseduffield/lazygit@v0.44.1
 - name: jqlang/jq@jq-1.7.1
-- name: junegunn/fzf@v0.56.0
+- name: junegunn/fzf@v0.56.3
 - name: koalaman/shellcheck@v0.10.0
 - name: kubernetes/kubectl@v1.31.2
 - name: lsd-rs/lsd@v1.1.5
