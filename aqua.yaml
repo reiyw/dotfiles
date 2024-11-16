@@ -34,7 +34,7 @@ packages:
 - name: lsd-rs/lsd@v1.1.5
 - name: mvdan/sh@v3.10.0
 - name: nushell/nushell@0.99.1
-- name: Schniz/fnm@v1.37.2
+- name: Schniz/fnm@v1.38.0
 - name: sharkdp/bat@v0.24.0
 - name: sharkdp/fd@v9.0.0
 - name: sharkdp/hyperfine@v1.18.0
