@@ -20,7 +20,7 @@ packages:
 - name: dalance/procs@v0.14.8
 - name: dandavison/delta@0.18.2
 - name: fullstorydev/grpcurl@v1.9.2
-- name: git-town/git-town@v16.6.1
+- name: git-town/git-town@v16.7.0
 - name: golang/go@go1.23.3
 - name: google/yamlfmt@v0.14.0
 - name: hadolint/hadolint@v2.12.0
