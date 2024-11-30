@@ -33,20 +33,6 @@ refreshPeriod = "168h"
 stripComponents = 1
 path = "bin/mold"
 
-{{ $helixVersion := "24.07" }}
-[".local/bin/hx"]
-type = "archive-file"
-url = "https://github.com/helix-editor/helix/releases/download/{{ $helixVersion }}/helix-{{ $helixVersion }}-x86_64-linux.tar.xz"
-refreshPeriod = "168h"
-stripComponents = 1
-path = "hx"
-[".config/helix/runtime"]
-type = "archive"
-url = "https://github.com/helix-editor/helix/releases/download/{{ $helixVersion }}/helix-{{ $helixVersion }}-x86_64-linux.tar.xz"
-refreshPeriod = "168h"
-stripComponents = 2
-include = ["*/runtime/**"]
-
 {{ $bazeliskVersion := "1.20.0" }}
 [".local/bin/bazel"]
 type = "file"
