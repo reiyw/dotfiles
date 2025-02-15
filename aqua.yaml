@@ -30,7 +30,7 @@ packages:
 - name: jqlang/jq@jq-1.7.1
 - name: junegunn/fzf@v0.59.0
 - name: koalaman/shellcheck@v0.10.0
-- name: kubernetes/kubectl@v1.32.1
+- name: kubernetes/kubectl@v1.32.2
 - name: lsd-rs/lsd@v1.1.5
 - name: mvdan/sh@v3.10.0
 - name: nushell/nushell@0.102.0
