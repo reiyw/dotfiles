@@ -18,8 +18,7 @@ sudo apt-get install -y \
 
 #!/bin/bash
 brew update
-brew bundle --no-lock --file=/dev/stdin <<EOF
-brew "colima"
+brew bundle --file=/dev/stdin <<EOF
 brew "coreutils"
 brew "curl"
 brew "docker"
@@ -31,7 +30,6 @@ brew "rsync"
 brew "wget"
 brew "zip"
 cask "bitwarden"
-cask "cscreen"
 cask "deepl"
 cask "hammerspoon"
 cask "iterm2"
