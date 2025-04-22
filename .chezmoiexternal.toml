@@ -1,4 +1,4 @@
-{{ $zimVersion := "1.14.0" }}
+{{ $zimVersion := "1.18.0" }}
 [".zim/zimfw.zsh"]
 type = "file"
 url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
