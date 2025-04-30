@@ -34,7 +34,6 @@ packages:
 - name: lsd-rs/lsd@v1.1.5
 - name: mvdan/sh@v3.11.0
 - name: nushell/nushell@0.103.0
-- name: rui314/mold@v2.38.0
 - name: sharkdp/bat@v0.25.0
 - name: sharkdp/fd@v9.0.0
 - name: sharkdp/hyperfine@v1.19.0
