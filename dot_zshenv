@@ -1,3 +1,5 @@
+skip_global_compinit=1
+
 export TZ='Asia/Tokyo'
 
 fpath=("$HOME/.local/zsh-functions" $fpath)
