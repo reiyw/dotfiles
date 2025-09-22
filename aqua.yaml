@@ -21,7 +21,7 @@ packages:
 - name: dandavison/delta@0.18.2
 - name: denoland/deno@v2.5.1
 - name: fullstorydev/grpcurl@v1.9.3
-- name: git-town/git-town@v21.4.0
+- name: git-town/git-town@v21.5.0
 - name: golang/go@go1.24.5
 - name: google/yamlfmt@v0.17.2
 - name: hadolint/hadolint@v2.12.0
