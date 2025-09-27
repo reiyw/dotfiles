@@ -24,7 +24,7 @@ packages:
 - name: git-town/git-town@v21.5.0
 - name: golang/go@go1.25.1
 - name: google/yamlfmt@v0.17.2
-- name: hadolint/hadolint@v2.12.0
+- name: hadolint/hadolint@v2.14.0
 - name: helm/helm@v3.19.0
 - name: jesseduffield/lazygit@v0.55.1
 - name: jqlang/jq@jq-1.8.1
