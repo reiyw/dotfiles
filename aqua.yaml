@@ -36,6 +36,6 @@ packages:
 - name: nushell/nushell@0.108.0
 - name: sharkdp/bat@v0.26.0
 - name: sharkdp/fd@v9.0.0
-- name: sharkdp/hyperfine@v1.19.0
+- name: sharkdp/hyperfine@v1.20.0
 - name: wagoodman/dive@v0.13.1
 - name: x-motemen/ghq@v1.8.0
