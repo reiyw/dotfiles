@@ -10,7 +10,7 @@ registries:
 - type: standard
   ref: v4.464.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: anthropics/claude-code@v2.1.29
+- name: anthropics/claude-code@v2.1.34
 - name: astral-sh/uv@0.9.28
 - name: bufbuild/buf@v1.64.0
 - name: BurntSushi/ripgrep@15.1.0
