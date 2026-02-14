@@ -24,7 +24,7 @@ packages:
 - name: golang/go@go1.25.7
 - name: google/yamlfmt@v0.21.0
 - name: hadolint/hadolint@v2.14.0
-- name: helm/helm@v4.1.0
+- name: helm/helm@v4.1.1
 - name: jesseduffield/lazygit@v0.59.0
 - name: jqlang/jq@jq-1.8.1
 - name: junegunn/fzf@v0.67.0
