@@ -21,7 +21,7 @@ packages:
 - name: denoland/deno@v2.6.9
 - name: fullstorydev/grpcurl@v1.9.3
 - name: git-town/git-town@v22.5.0
-- name: golang/go@go1.25.7
+- name: golang/go@go1.26.0
 - name: google/yamlfmt@v0.21.0
 - name: hadolint/hadolint@v2.14.0
 - name: helm/helm@v4.1.1
