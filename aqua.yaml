@@ -11,7 +11,7 @@ registries:
   ref: v4.516.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: anthropics/claude-code@v2.1.150
-- name: astral-sh/uv@0.11.16
+- name: astral-sh/uv@0.11.17
 - name: bufbuild/buf@v1.69.0
 - name: BurntSushi/ripgrep@15.1.0
 - name: Byron/dua-cli@v2.34.0
