@@ -29,7 +29,7 @@ packages:
 - name: jqlang/jq@jq-1.8.1
 - name: junegunn/fzf@v0.73.1
 - name: koalaman/shellcheck@v0.11.0
-- name: kubernetes/kubectl@v1.36.1
+- name: kubernetes/kubectl@v1.36.2
 - name: lsd-rs/lsd@v1.2.0
 - name: mvdan/sh@v3.13.1
 - name: openai/codex@rust-v0.137.0
