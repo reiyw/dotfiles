@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
 {{ if .remoteContainers -}}
-sudo cp ~/aqua.yaml /workspace
+run_with_sudo () {
+    if [[ $EUID = 0 ]]; then
+        "$@"
+    elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+        command sudo "$@"
+    else
+        echo "Skipping (sudo unavailable): $*" >&2
+        return 0
+    fi
+}
+
+cp ~/aqua.yaml /workspace 2>/dev/null || run_with_sudo cp ~/aqua.yaml /workspace
 {{ end -}}
