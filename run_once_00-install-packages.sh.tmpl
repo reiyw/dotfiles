@@ -48,8 +48,9 @@ EOF
 
 {{ end -}}
 
-if command -v starship >/dev/null 2>&1; then 
+if command -v starship >/dev/null 2>&1; then
     echo "starship already installed"
 else
-    sh -c "$(curl -fsSL https://starship.rs/install.sh)" -y -f
+    mkdir -p "$HOME/.local/bin"
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y -f -b "$HOME/.local/bin"
 fi
