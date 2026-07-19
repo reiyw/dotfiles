@@ -13,7 +13,7 @@ packages:
 - name: anthropics/claude-code@v2.1.215
 - name: astral-sh/uv@0.11.29
 - name: bufbuild/buf@v1.72.0
-- name: BurntSushi/ripgrep@15.1.0
+- name: BurntSushi/ripgrep@15.2.0
 - name: Byron/dua-cli@v2.37.1
 - name: casey/just@1.56.0
 - name: cli/cli@v2.96.0
