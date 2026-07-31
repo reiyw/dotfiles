@@ -9,6 +9,11 @@ type = "git-repo"
 url = "https://github.com/ingydotnet/git-subrepo.git"
 refreshPeriod = "168h"
 
+[".agents/skills/fd287c3133457c4fd8f5601d34aa817d"]
+type = "git-repo"
+url = "https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"
+refreshPeriod = "168h"
+
 {{ if eq .chezmoi.os "linux" }}
 
 {{ $pueueVersion := "3.4.1" }}
