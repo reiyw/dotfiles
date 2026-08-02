@@ -23,7 +23,7 @@ packages:
 - name: git-town/git-town@v23.0.3
 - name: golang/go@go1.26.5
 - name: google/yamlfmt@v0.21.0
-- name: hadolint/hadolint@v2.14.0
+- name: hadolint/hadolint@v2.15.1
 - name: helm/helm@v4.2.3
 - name: jesseduffield/lazygit@v0.63.1
 - name: jqlang/jq@jq-1.8.2
