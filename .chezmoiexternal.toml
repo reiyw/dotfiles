@@ -14,6 +14,13 @@ type = "git-repo"
 url = "https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"
 refreshPeriod = "168h"
 
+[".agents/skills/i-have-adhd"]
+type = "archive"
+url = "https://github.com/ayghri/i-have-adhd/archive/refs/heads/main.tar.gz"
+refreshPeriod = "168h"
+stripComponents = 3
+include = ["i-have-adhd-main/skills/i-have-adhd/**"]
+
 {{ if eq .chezmoi.os "linux" }}
 
 {{ $pueueVersion := "3.4.1" }}
