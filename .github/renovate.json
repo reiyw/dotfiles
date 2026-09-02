@@ -5,5 +5,14 @@
     ":automergeRequireAllStatusChecks",
     "schedule:weekends"
   ],
-  "timezone": "Asia/Tokyo"
+  "timezone": "Asia/Tokyo",
+  "packageRules": [
+    {
+      "description": "Keep tree-sitter on binaries compatible with pre-GLIBC 2.39 hosts",
+      "matchPackageNames": [
+        "tree-sitter/tree-sitter"
+      ],
+      "allowedVersions": "<0.26.0"
+    }
+  ]
 }
