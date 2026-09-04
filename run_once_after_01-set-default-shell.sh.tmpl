@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -u
+
+zsh_path="$(command -v zsh 2>/dev/null || true)"
+if [[ -z $zsh_path || ! -x $zsh_path ]]; then
+    echo "Skipping default shell change: zsh is not installed." >&2
+    exit 0
+fi
+
+user_name="$(id -un)"
+current_shell=""
+if command -v getent >/dev/null 2>&1; then
+    current_shell="$(getent passwd "$(id -u)" | awk -F: 'NR == 1 { print $7 }')"
+elif command -v dscl >/dev/null 2>&1; then
+    current_shell="$(dscl . -read "/Users/${user_name}" UserShell 2>/dev/null | awk 'NR == 1 { print $2 }')"
+fi
+current_shell="${current_shell:-${SHELL:-}}"
+
+# /bin and /usr/bin can refer to the same file on merged-/usr systems.
+if [[ $current_shell == "$zsh_path" ]] ||
+    { [[ -n $current_shell && -e $current_shell ]] && [[ $current_shell -ef $zsh_path ]]; }; then
+    echo "zsh is already the default shell for ${user_name}."
+    exit 0
+fi
+
+if [[ -r /etc/shells ]] && ! awk -v shell="$zsh_path" '$0 == shell { found = 1 } END { exit !found }' /etc/shells; then
+    echo "Skipping default shell change: ${zsh_path} is not listed in /etc/shells." >&2
+    exit 0
+fi
+
+if [[ $EUID == 0 ]]; then
+    change_shell=(chsh -s "$zsh_path" "$user_name")
+elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+    change_shell=(sudo -n chsh -s "$zsh_path" "$user_name")
+else
+    echo "Skipping default shell change: passwordless sudo is unavailable." >&2
+    echo "Run 'chsh -s ${zsh_path}' to change it manually." >&2
+    exit 0
+fi
+
+if "${change_shell[@]}"; then
+    echo "Changed the default shell for ${user_name} to ${zsh_path}."
+else
+    echo "Could not change the default shell for ${user_name}." >&2
+    echo "Run 'chsh -s ${zsh_path}' to change it manually." >&2
+fi
