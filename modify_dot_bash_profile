@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -eu
+
+marker="# chezmoi: start zsh fallback"
+current="$(mktemp)"
+trap 'rm -f "$current"' EXIT
+cat >"$current"
+
+cat "$current"
+if grep -Fqx "$marker" "$current"; then
+    exit 0
+fi
+
+[[ ! -s $current ]] || printf '\n'
+cat <<'EOF'
+# chezmoi: start zsh fallback
+# Use zsh for interactive logins when chsh is unavailable.
+if [[ $- == *i* ]] && command -v zsh >/dev/null 2>&1; then
+    exec zsh -l
+fi
+# chezmoi: end zsh fallback
+EOF
