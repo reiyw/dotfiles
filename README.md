@@ -19,4 +19,5 @@ launch `$SHELL` start zsh. Non-interactive shells are left unchanged.
 ## Agent skills
 
 Agent skills are managed as chezmoi externals under `~/.agents/skills`. They are
-installed and refreshed automatically by `chezmoi apply`.
+installed and refreshed automatically by `chezmoi apply`. Chezmoi also creates
+links under `~/.claude/skills` so Claude Code can discover the same skills.
