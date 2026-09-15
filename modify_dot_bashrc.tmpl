@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -eu
+
+start_marker="# chezmoi: start bash CLI environment"
+end_marker="# chezmoi: end bash CLI environment"
+current="$(mktemp)"
+trap 'rm -f "$current"' EXIT
+cat >"$current"
+
+print_environment() {
+    cat <<'EOF'
+# chezmoi: start bash CLI environment
+# Make the CLI tools installed by this dotfiles repository available in bash.
+# This managed block intentionally defines no aliases.
+{{ if eq .chezmoi.os "linux" -}}
+export LC_ALL=C.UTF-8
+{{ else if eq .chezmoi.os "darwin" -}}
+export LANG=C
+export LC_CTYPE=en_US.UTF-8
+{{- end }}
+
+export TZ='Asia/Tokyo'
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+export PATH="$HOME/.deno/bin:$PATH"
+
+# Tell the python-build-standalone Python where to find the terminfo database.
+# https://gregoryszorc.com/docs/python-build-standalone/main/quirks.html#backspace-key-doesn-t-work-in-python-repl
+export TERMINFO_DIRS=/etc/terminfo:/lib/terminfo:/usr/share/terminfo
+
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+[ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
+[ -e "$HOME/.local/share/git-subrepo" ] && source "$HOME/.local/share/git-subrepo/.rc"
+
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
+# chezmoi: end bash CLI environment
+EOF
+}
+
+if grep -Fqx "$start_marker" "$current"; then
+    in_environment=false
+    environment_printed=false
+    while IFS= read -r line || [[ -n $line ]]; do
+        if [[ $line == "$start_marker" ]]; then
+            if [[ $environment_printed == false ]]; then
+                print_environment
+                environment_printed=true
+            fi
+            in_environment=true
+        elif [[ $in_environment == true && $line == "$end_marker" ]]; then
+            in_environment=false
+        elif [[ $in_environment == false ]]; then
+            printf '%s\n' "$line"
+        fi
+    done <"$current"
+    exit 0
+fi
+
+cat "$current"
+[[ ! -s $current ]] || printf '\n'
+print_environment

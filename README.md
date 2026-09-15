@@ -16,6 +16,11 @@ to preserve the existing `~/.bash_profile` and `~/.profile` and add an
 interactive-shell guard. The fallback also updates `SHELL`, so programs that
 launch `$SHELL` start zsh. Non-interactive shells are left unchanged.
 
+A chezmoi modify script preserves the system-provided `~/.bashrc` and appends
+the paths and environment needed by the installed CLI tools. The managed block
+intentionally does not define aliases, so it does not hide standard commands.
+Machine-specific bash configuration can be added to `~/.bashrc.local`.
+
 ## Agent skills
 
 Agent skills are managed as chezmoi externals under `~/.agents/skills`. They are
