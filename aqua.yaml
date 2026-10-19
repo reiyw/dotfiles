@@ -35,6 +35,7 @@ packages:
 - name: mvdan/sh@v3.14.1
 - name: neovim/neovim@v0.12.6
 - name: openai/codex@rust-v0.163.0
+- name: pnpm/pnpm@v12.14.0
 - name: sharkdp/bat@v0.26.1
 - name: sharkdp/fd@v9.0.0
 - name: sharkdp/hyperfine@v1.21.0
