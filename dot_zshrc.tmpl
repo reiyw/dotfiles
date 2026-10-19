@@ -31,6 +31,12 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
+# Behave like bash for globbing: don't treat `^`, `#`, `~` as patterns
+# (enabled by zim's environment module), and pass unmatched patterns through
+# literally instead of erroring (e.g. `npm i foo@^1.0`, `git show HEAD^`).
+unsetopt EXTENDED_GLOB
+setopt NO_NOMATCH
+
 # Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
 zmodload -F zsh/terminfo +p:terminfo
 for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
