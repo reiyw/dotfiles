@@ -7,4 +7,5 @@ export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
 export PATH="$PNPM_HOME/bin:$PATH"
 
 pnpm add -g \
+    --allow-build=node-pty \
     @getpaseo/cli
