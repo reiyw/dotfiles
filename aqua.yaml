@@ -33,7 +33,7 @@ packages:
 - name: lsd-rs/lsd@v1.2.0
 - name: mvdan/sh@v3.14.1
 - name: neovim/neovim@v0.12.6
-- name: nodejs/node@v24.22.1
+- name: nodejs/node@v26.12.1
 - name: openai/codex@rust-v0.164.0
 - name: pnpm/pnpm@v12.14.0
 - name: sharkdp/bat@v0.26.1
