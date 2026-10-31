@@ -13,6 +13,26 @@
         "tree-sitter/tree-sitter"
       ],
       "allowedVersions": "<0.26.0"
+    },
+    {
+      "description": "Avoid freshly published npm releases",
+      "matchDatasources": [
+        "npm"
+      ],
+      "minimumReleaseAge": "3 days"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "pnpm global packages pinned in chezmoi run_onchange script",
+      "managerFilePatterns": [
+        "/^run_onchange_after_01-install-pnpm-global-packages\\.sh$/"
+      ],
+      "matchStrings": [
+        "(?<depName>@?[^\\s@=]+)@(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "datasourceTemplate": "npm"
     }
   ]
 }
