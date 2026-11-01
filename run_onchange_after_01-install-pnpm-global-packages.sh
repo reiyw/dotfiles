@@ -8,4 +8,4 @@ export PATH="$PNPM_HOME/bin:$PATH"
 
 pnpm add -g \
     --allow-build=node-pty \
-    @getpaseo/cli@0.13.2
+    @getpaseo/cli@0.14.0
