@@ -8,5 +8,5 @@ export PATH="$PNPM_HOME/bin:$PATH"
 
 pnpm add -g \
     --allow-build=node-pty \
-    @getpaseo/cli@0.14.0 \
+    @getpaseo/cli@0.15.0 \
     @openai/codex@0.166.0
