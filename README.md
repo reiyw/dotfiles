@@ -5,7 +5,7 @@ My [chezmoi](https://www.chezmoi.io/) configuration.
 ## Usage
 
 ```shell
-sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply reiyw
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply reiyw
 ```
 
 The installer installs zsh on Linux and makes it the login shell. The shell
