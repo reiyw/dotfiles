@@ -42,4 +42,4 @@ packages:
 - name: tailscale/tailscale@v1.104.5
 - name: tree-sitter/tree-sitter@v0.25.10
 - name: wagoodman/dive@v0.13.1
-- name: x-motemen/ghq@v1.11.2
+- name: x-motemen/ghq@v1.12.0
