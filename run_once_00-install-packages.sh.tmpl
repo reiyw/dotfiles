@@ -1,6 +1,8 @@
 {{ if eq .chezmoi.os "linux" -}}
 
 #!/bin/bash
+set -e
+
 run_with_sudo ()
 {
     if [[ $EUID = 0 ]]; then
@@ -15,9 +17,9 @@ run_with_sudo ()
 
 run_with_sudo apt-get update
 run_with_sudo apt-get install -y \
-    dnsutils \
+    bind9-dnsutils \
     jo \
-    netcat \
+    netcat-openbsd \
     ;
 
 {{ else if eq .chezmoi.os "darwin" -}}

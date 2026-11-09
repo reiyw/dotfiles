@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 {{ if eq .chezmoi.os "linux" -}}
+set -eu
+
 run_with_sudo () {
     if [[ $EUID = 0 ]]; then
         "$@"
@@ -12,5 +14,26 @@ run_with_sudo () {
 }
 
 run_with_sudo apt-get update
-run_with_sudo apt-get install -y unzip wget zsh
+run_with_sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    build-essential \
+    ca-certificates \
+    curl \
+    file \
+    git \
+    gnupg \
+    less \
+    locales \
+    openssh-client \
+    procps \
+    python3 \
+    unzip \
+    wget \
+    zsh \
+    ;
+
+# The shell rc files set LC_CTYPE=en_US.UTF-8.
+if ! locale -a 2>/dev/null | grep -qix 'en_US\.utf-\?8' && [[ -f /etc/locale.gen ]]; then
+    run_with_sudo sed -i 's/^# *\(en_US\.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+    run_with_sudo locale-gen
+fi
 {{ end -}}
