@@ -68,7 +68,9 @@ elif [[ $current_version != "$pinned_version" ]]; then
     echo "T3 Code ${current_version} is newer than ${pinned_version}; leaving it as is." >&2
 fi
 
-if ! command -v systemctl >/dev/null 2>&1 || ! systemctl --user show-environment >/dev/null 2>&1; then
+# /run/systemd/system exists only when systemd is PID 1. Check it first: dev
+# container images ship a fake systemctl that succeeds without systemd.
+if [[ ! -d /run/systemd/system ]] || ! systemctl --user show-environment >/dev/null 2>&1; then
     echo "Skipping the T3 Code service: no systemd user manager is running." >&2
     exit 0
 fi
@@ -76,15 +78,16 @@ fi
 # `t3 service install` refuses to install without lingering, which keeps the
 # user manager, and so the service, running while logged out. polkit usually
 # lets users enable it for themselves; without polkit it takes root.
-linger() { loginctl show-user "$USER" --property=Linger --value 2>/dev/null; }
+user=$(id -un)
+linger() { loginctl show-user "$user" --property=Linger --value 2>/dev/null; }
 if [[ $(linger) != yes ]]; then
-    loginctl enable-linger --no-ask-password "$USER" 2>/dev/null ||
-        run_with_sudo loginctl enable-linger "$USER" ||
+    loginctl enable-linger --no-ask-password "$user" 2>/dev/null ||
+        run_with_sudo loginctl enable-linger "$user" ||
         true
 fi
 if [[ $(linger) != yes ]]; then
     echo "Skipping the T3 Code service: lingering is off and cannot be turned on without root." >&2
-    echo "Ask an administrator to run \`loginctl enable-linger $USER\`, then run \`t3 service install\`." >&2
+    echo "Ask an administrator to run \`loginctl enable-linger $user\`, then run \`t3 service install\`." >&2
     exit 0
 fi
 

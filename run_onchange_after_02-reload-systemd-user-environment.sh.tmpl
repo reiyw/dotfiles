@@ -5,7 +5,9 @@
 # environment.d hash: {{ includeTemplate "cli-env" "environment.d" | sha256sum }}
 set -eu
 
-if command -v systemctl >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then
+# /run/systemd/system exists only when systemd is PID 1. Check it first: dev
+# container images ship a fake systemctl that succeeds without systemd.
+if [[ -d /run/systemd/system ]] && systemctl --user show-environment >/dev/null 2>&1; then
     systemctl --user daemon-reload
     echo "Reloaded the systemd user environment; restart running user services (e.g. t3code.service) to pick it up." >&2
 fi
