@@ -1,0 +1,30 @@
+{{- /*
+Environment for the CLI tools installed by these dotfiles: aqua, pnpm, cargo
+and ~/.local/bin. Shell startup files and systemd's environment.d all render
+it from here, so every way of starting a program sees the same PATH.
+
+Call it with the output format, "sh" or "environment.d". The values use only
+the ${VAR} and ${VAR:-default} expansions that both formats support.
+*/ -}}
+{{- $vars := list
+    (list "AQUA_GLOBAL_CONFIG" "${HOME}/aqua.yaml")
+    (list "PNPM_HOME" "${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm") -}}
+{{- /* Highest priority first. */ -}}
+{{- $path := list
+    "${HOME}/.cargo/bin"
+    "${PNPM_HOME}/bin"
+    "${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-${HOME}/.local/share}/aquaproj-aqua}/bin"
+    "${HOME}/.local/bin" -}}
+{{- if eq . "sh" -}}
+{{- range $vars -}}
+export {{ index . 0 }}="{{ index . 1 }}"
+{{ end -}}
+export PATH="{{ join ":" $path }}:${PATH}"
+{{- else if eq . "environment.d" -}}
+{{- range $vars -}}
+{{ index . 0 }}={{ index . 1 }}
+{{ end -}}
+PATH={{ join ":" $path }}:${PATH}
+{{- else -}}
+{{- fail (printf "cli-env: unknown format %q" .) -}}
+{{- end -}}

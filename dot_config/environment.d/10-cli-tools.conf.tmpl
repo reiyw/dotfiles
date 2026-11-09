@@ -1,0 +1,4 @@
+# Put the CLI tools installed by these dotfiles on PATH for systemd user
+# services such as t3code.service, which do not read shell startup files.
+# Rendered from .chezmoitemplates/cli-env in the dotfiles repository.
+{{ includeTemplate "cli-env" "environment.d" }}

@@ -20,6 +20,11 @@ case $- in
         fi
         ;;
 esac
+# ~/.bash_profile shadows ~/.profile, so load it for non-interactive logins
+# (e.g. `bash -lc` from GUI tools) to set up PATH and the CLI tools.
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
 # chezmoi: end zsh fallback
 EOF
 }

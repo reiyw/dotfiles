@@ -2,7 +2,7 @@
 #!/usr/bin/env bash
 # Re-run the systemd user environment generators so that services started
 # from now on see the new environment.d settings.
-# environment.d hash: {{ include "dot_config/environment.d/10-cli-tools.conf" | sha256sum }}
+# environment.d hash: {{ includeTemplate "cli-env" "environment.d" | sha256sum }}
 set -eu
 
 if command -v systemctl >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then

@@ -20,6 +20,9 @@ case $- in
         fi
         ;;
 esac
+# Set up the CLI tools installed by these dotfiles for non-interactive logins
+# (e.g. `sh -lc`, or `bash -lc` through ~/.bash_profile).
+{{ includeTemplate "cli-env" "sh" }}
 # chezmoi: end zsh fallback
 EOF
 }
