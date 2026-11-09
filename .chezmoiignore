@@ -9,6 +9,10 @@ install.sh
 .gitconfig
 {{- end }}
 
+{{- if ne .chezmoi.os "linux" }}
+.config/environment.d/
+{{- end }}
+
 {{- if eq .chezmoi.os "darwin" }}
 .aerospace.toml
 .config/karabiner/karabiner.json

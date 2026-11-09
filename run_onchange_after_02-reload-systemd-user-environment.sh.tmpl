@@ -1,0 +1,12 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+# Re-run the systemd user environment generators so that services started
+# from now on see the new environment.d settings.
+# environment.d hash: {{ include "dot_config/environment.d/10-cli-tools.conf" | sha256sum }}
+set -eu
+
+if command -v systemctl >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then
+    systemctl --user daemon-reload
+    echo "Reloaded the systemd user environment; restart running user services (e.g. t3code.service) to pick it up." >&2
+fi
+{{ end -}}
