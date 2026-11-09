@@ -13,6 +13,11 @@ packages:
 - name: anomalyco/opencode@v2.2.6
 - name: anthropics/claude-code@v2.1.319
 - name: astral-sh/uv@0.13.7
+- name: bazel-contrib/buildtools/buildifier@v10.2.0
+- name: bazelbuild/bazelisk@v1.30.0
+  command_aliases:
+  - command: bazelisk
+    alias: bazel
 - name: bufbuild/buf@v1.75.0
 - name: BurntSushi/ripgrep@15.2.0
 - name: Byron/dua-cli@v3.0.0

@@ -4,59 +4,7 @@ type = "file"
 url = "https://github.com/zimfw/zimfw/releases/download/v{{ $zimVersion }}/zimfw.zsh"
 refreshPeriod = "168h"
 
-[".local/share/git-subrepo"]
-type = "git-repo"
-url = "https://github.com/ingydotnet/git-subrepo.git"
-refreshPeriod = "168h"
-
 [".agents/skills/fd287c3133457c4fd8f5601d34aa817d"]
 type = "git-repo"
 url = "https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"
 refreshPeriod = "168h"
-
-[".agents/skills/i-have-adhd"]
-type = "archive"
-url = "https://github.com/ayghri/i-have-adhd/archive/refs/heads/main.tar.gz"
-refreshPeriod = "168h"
-stripComponents = 3
-include = ["i-have-adhd-main/skills/i-have-adhd/**"]
-
-{{ if eq .chezmoi.os "linux" }}
-
-{{ $pueueVersion := "3.4.1" }}
-[".local/bin/pueue"]
-type = "file"
-url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueueVersion }}/pueue-linux-x86_64"
-refreshPeriod = "168h"
-executable = true
-
-{{ $pueuedVersion := "3.4.1" }}
-[".local/bin/pueued"]
-type = "file"
-url = "https://github.com/Nukesor/pueue/releases/download/v{{ $pueuedVersion }}/pueued-linux-x86_64"
-refreshPeriod = "168h"
-executable = true
-
-{{ $bazeliskVersion := "1.20.0" }}
-[".local/bin/bazel"]
-type = "file"
-url = "https://github.com/bazelbuild/bazelisk/releases/download/v{{ $bazeliskVersion }}/bazelisk-linux-amd64"
-refreshPeriod = "168h"
-executable = true
-
-# https://github.com/bazelbuild/buildtools/releases/download/v6.3.3/buildifier-linux-amd64
-{{ $buildifierVersion := "7.3.1" }}
-[".local/bin/buildifier"]
-type = "file"
-url = "https://github.com/bazelbuild/buildtools/releases/download/v{{ $buildifierVersion }}/buildifier-linux-amd64"
-refreshPeriod = "168h"
-executable = true
-
-{{ $qvVersion := "0.8.4" }}
-[".local/bin/qv"]
-type = "archive-file"
-url = "https://github.com/timvw/qv/releases/download/v{{ $qvVersion }}/qv-{{ $qvVersion }}-x86_64-unknown-linux-gnu-generic.tar.gz"
-refreshPeriod = "168h"
-path = "qv"
-
-{{ end }}
