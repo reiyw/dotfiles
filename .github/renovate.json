@@ -33,6 +33,17 @@
         "(?<depName>@?[^\\s@=]+)@(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ],
       "datasourceTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "description": "T3 Code CLI pinned in chezmoi run_onchange script",
+      "managerFilePatterns": [
+        "/^run_onchange_after_03-install-t3code\\.sh\\.tmpl$/"
+      ],
+      "matchStrings": [
+        "pinned_version=(?<currentValue>\\S+) # renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)"
+      ],
+      "extractVersionTemplate": "^v(?<version>.*)$"
     }
   ]
 }
