@@ -19,10 +19,18 @@ jobs:
           - mcr.microsoft.com/vscode/devcontainers/base:debian-13
           - mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04
           - mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04
+          # Minimal images without curl, git, or CA certificates.
+          - debian:12
+          - debian:13
     runs-on: ubuntu-latest
     container:
       image: ${{ matrix.image }}
     steps:
+      - name: Install bootstrap packages
+        if: startsWith(matrix.image, 'debian:')
+        run: |
+          apt-get update
+          apt-get install -y ca-certificates curl git
       - uses: actions/checkout@v7
       - run: ./install.sh
         env:

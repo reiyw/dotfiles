@@ -8,6 +8,19 @@ My [chezmoi](https://www.chezmoi.io/) configuration.
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply reiyw
 ```
 
+A minimal Debian or Ubuntu installation does not include `curl`. Install the
+bootstrap packages first (prefix the commands with `sudo` when not running as
+root):
+
+```shell
+apt-get update
+apt-get install -y ca-certificates curl git
+```
+
+On Linux, the installer then installs the remaining base packages with `apt-get`,
+including `build-essential`, `gnupg`, `python3` and `zsh`. This step requires
+root or passwordless `sudo`; otherwise it is skipped.
+
 The installer installs zsh on Linux and makes it the login shell. The shell
 change is non-interactive: if passwordless `sudo` is unavailable, the installer
 continues without attempting a password-based `chsh`. As a fallback for
