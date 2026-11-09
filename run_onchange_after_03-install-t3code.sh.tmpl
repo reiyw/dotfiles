@@ -1,0 +1,95 @@
+{{ if and (eq .chezmoi.os "linux") (not .codespaces) (not .remoteContainers) -}}
+#!/usr/bin/env bash
+# Install the T3 Code CLI and run it as a systemd user service.
+#
+# This only moves T3 Code forward: when `t3 update` has already put this
+# machine on a newer version than the one pinned here, nothing is changed.
+# An upgrade does not restart a running service, because that would stop the
+# agent turns running in it (possibly the one running `chezmoi apply`).
+# Run `t3 service restart` to switch the service to the new version.
+set -euo pipefail
+
+pinned_version=0.1.7 # renovate: datasource=github-releases depName=pingdotgg/t3code
+
+t3_home="${T3CODE_HOME:-$HOME/.t3}"
+launcher="$HOME/.local/bin/t3"
+unit="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/t3code.service"
+
+run_with_sudo() {
+    if [[ $EUID = 0 ]]; then
+        "$@"
+    elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+        command sudo "$@"
+    else
+        echo "Skipping (sudo unavailable): $*" >&2
+        return 1
+    fi
+}
+
+# Succeeds when version $1 is newer than version $2.
+version_gt() {
+    [[ $1 != "$2" && $(printf '%s\n%s\n' "$1" "$2" | sort -V | tail -n 1) = "$1" ]]
+}
+
+# The newest of the version the service runs and the one the launcher points at.
+installed_version() {
+    local versions=() version link
+    if version=$(sed -n 's/.*"activeVersion": *"\([^"]*\)".*/\1/p' "$t3_home/runtime/service-state.json" 2>/dev/null) && [[ -n $version ]]; then
+        versions+=("$version")
+    fi
+    if link=$(readlink "$launcher" 2>/dev/null) && [[ $link = "$t3_home/runtime/versions/"*/t3 ]]; then
+        version=${link#"$t3_home/runtime/versions/"}
+        versions+=("${version%/t3}")
+    fi
+    ((${#versions[@]})) && printf '%s\n' "${versions[@]}" | sort -V | tail -n 1
+}
+
+current_version=$(installed_version || true)
+
+if [[ ! -e $launcher && ! -L $launcher ]]; then
+    # First install on this machine, or T3 came from the desktop app's SSH
+    # launch and has no `t3` command yet. Never go below what is installed.
+    version=$pinned_version
+    if [[ -n $current_version ]] && version_gt "$current_version" "$version"; then
+        version=$current_version
+    fi
+    installer=$(mktemp)
+    trap 'rm -f "$installer"' EXIT
+    if command -v curl >/dev/null 2>&1; then
+        curl -fsSL https://t3.codes/install.sh -o "$installer"
+    else
+        wget -qO "$installer" https://t3.codes/install.sh
+    fi
+    T3CODE_VERSION="$version" sh "$installer" </dev/null
+elif [[ -z $current_version ]] || version_gt "$pinned_version" "$current_version"; then
+    # Without a terminal, `t3 update` updates the service but does not restart it.
+    "$launcher" update "$pinned_version" </dev/null
+elif [[ $current_version != "$pinned_version" ]]; then
+    echo "T3 Code ${current_version} is newer than ${pinned_version}; leaving it as is." >&2
+fi
+
+if ! command -v systemctl >/dev/null 2>&1 || ! systemctl --user show-environment >/dev/null 2>&1; then
+    echo "Skipping the T3 Code service: no systemd user manager is running." >&2
+    exit 0
+fi
+
+# `t3 service install` refuses to install without lingering, which keeps the
+# user manager, and so the service, running while logged out. polkit usually
+# lets users enable it for themselves; without polkit it takes root.
+linger() { loginctl show-user "$USER" --property=Linger --value 2>/dev/null; }
+if [[ $(linger) != yes ]]; then
+    loginctl enable-linger --no-ask-password "$USER" 2>/dev/null ||
+        run_with_sudo loginctl enable-linger "$USER" ||
+        true
+fi
+if [[ $(linger) != yes ]]; then
+    echo "Skipping the T3 Code service: lingering is off and cannot be turned on without root." >&2
+    echo "Ask an administrator to run \`loginctl enable-linger $USER\`, then run \`t3 service install\`." >&2
+    exit 0
+fi
+
+if [[ ! -f $unit ]]; then
+    "$launcher" service install
+    echo "Run \`t3 up\` to choose how your other devices reach T3 Code." >&2
+fi
+{{ end -}}
