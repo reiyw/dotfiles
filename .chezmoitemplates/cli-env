@@ -3,10 +3,17 @@ Environment for the CLI tools installed by these dotfiles: aqua, pnpm, cargo
 and ~/.local/bin. Shell startup files and systemd's environment.d all render
 it from here, so every way of starting a program sees the same PATH.
 
+CLAUDE_CODE_SHELL makes Claude Code run its commands in bash, away from the
+interactive zsh setup (zim's aliases and options such as NO_CLOBBER). That
+bash is non-interactive, so Debian's ~/.bashrc returns before the chezmoi
+block; TZ is here so it still reaches Claude Code from the parent environment.
+
 Call it with the output format, "sh" or "environment.d". The values use only
 the ${VAR} and ${VAR:-default} expansions that both formats support.
 */ -}}
 {{- $vars := list
+    (list "TZ" "Asia/Tokyo")
+    (list "CLAUDE_CODE_SHELL" "/bin/bash")
     (list "AQUA_GLOBAL_CONFIG" "${HOME}/aqua.yaml")
     (list "PNPM_HOME" "${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm") -}}
 {{- /* Highest priority first. */ -}}

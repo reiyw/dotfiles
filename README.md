@@ -37,7 +37,9 @@ intentionally does not define aliases, so it does not hide standard commands.
 Machine-specific bash configuration can be added to `~/.bashrc.local`.
 
 The environment for the CLI tools (`PATH` entries for aqua, pnpm, cargo and
-`~/.local/bin`, plus their settings) is defined once in
+`~/.local/bin`, plus their settings, `TZ`, and `CLAUDE_CODE_SHELL=/bin/bash`
+so that Claude Code runs commands in bash instead of the interactive zsh setup)
+is defined once in
 `.chezmoitemplates/cli-env`. It is rendered into `~/.zshrc`, `~/.bashrc`,
 `~/.profile` and, on Linux, `~/.config/environment.d/10-cli-tools.conf`, so
 systemd user services (such as the T3 Code server) that do not read shell
