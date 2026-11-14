@@ -27,6 +27,7 @@ packages:
 - name: fullstorydev/grpcurl@v1.9.4
 - name: git-town/git-town@v24.1.1
 - name: golang/go@go1.27.3
+- name: google-antigravity/antigravity-cli@1.5.9
 - name: google/yamlfmt@v0.21.0
 - name: hadolint/hadolint@v2.15.1
 - name: helm/helm@v4.3.1
