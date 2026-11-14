@@ -20,7 +20,7 @@ packages:
     alias: bazel
 - name: bufbuild/buf@v1.75.0
 - name: BurntSushi/ripgrep@15.2.0
-- name: Byron/dua-cli@v3.0.0
+- name: Byron/dua-cli@v3.0.3
 - name: casey/just@1.59.0
 - name: cli/cli@v2.103.3
 - name: dandavison/delta@0.20.1
