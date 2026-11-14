@@ -1,0 +1,6 @@
+# Left behind by zimfw, which these dotfiles no longer use.
+.zim
+.zimrc
+.zcompdump.dat
+.zcompdump.zwc
+.zcompdump.zwc.old

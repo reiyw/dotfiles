@@ -4,7 +4,7 @@ and ~/.local/bin. Shell startup files and systemd's environment.d all render
 it from here, so every way of starting a program sees the same PATH.
 
 CLAUDE_CODE_SHELL makes Claude Code run its commands in bash, away from the
-interactive zsh setup (zim's aliases and options such as NO_CLOBBER). That
+interactive zsh setup (aliases and options such as NO_CLOBBER). That
 bash is non-interactive, so Debian's ~/.bashrc returns before the chezmoi
 block; TZ is here so it still reaches Claude Code from the parent environment.
 

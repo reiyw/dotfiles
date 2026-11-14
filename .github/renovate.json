@@ -44,6 +44,17 @@
         "pinned_version=(?<currentValue>\\S+) # renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)"
       ],
       "extractVersionTemplate": "^v(?<version>.*)$"
+    },
+    {
+      "customType": "regex",
+      "description": "zsh plugins fetched as GitHub tag archives by chezmoi",
+      "managerFilePatterns": [
+        "/^\\.chezmoiexternal\\.toml$/"
+      ],
+      "matchStrings": [
+        "https://github\\.com/(?<depName>[^/]+/[^/]+)/archive/refs/tags/(?<currentValue>[^/\"]+)\\.tar\\.gz"
+      ],
+      "datasourceTemplate": "github-tags"
     }
   ]
 }
