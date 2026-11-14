@@ -30,7 +30,7 @@ packages:
 - name: google-antigravity/antigravity-cli@1.5.9
 - name: google/yamlfmt@v0.21.0
 - name: hadolint/hadolint@v2.15.1
-- name: helm/helm@v4.3.1
+- name: helm/helm@v4.3.2
 - name: herdrdev/herdr@v0.9.5
 - name: jesseduffield/lazygit@v0.66.3
 - name: jqlang/jq@jq-1.8.2
