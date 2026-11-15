@@ -3,4 +3,4 @@
 # tailscale command must come from the system package, which aqua's links in
 # PATH would otherwise hide.
 packages:
-- name: tailscale/tailscale@v1.104.5
+- name: tailscale/tailscale@v1.104.7
