@@ -4,3 +4,9 @@
 .zcompdump.dat
 .zcompdump.zwc
 .zcompdump.zwc.old
+
+{{- if ne .tailscaleMode "userspace" }}
+# Left behind when a machine moves from userspace tailscaled to the system
+# package; aqua's tailscale would otherwise hide the system one in PATH.
+.config/aqua/imports/tailscale.aqua.yaml
+{{- end }}

@@ -1,0 +1,112 @@
+{{ if ne .tailscaleMode "none" -}}
+#!/usr/bin/env bash
+# Set up tailscaled the way .chezmoi.toml.tmpl chose for this machine
+# (tailscaleMode = {{ .tailscaleMode }}).
+#
+# Joining the tailnet needs a browser login, so it is left to the user; see
+# the message printed at the end.
+set -euo pipefail
+
+# /run/systemd/system exists only when systemd is PID 1. Check it first: dev
+# container images ship a fake systemctl that succeeds without systemd.
+if [[ ! -d /run/systemd/system ]]; then
+    echo "Skipping Tailscale: systemd is not running, so tailscaled cannot run as a service." >&2
+    exit 0
+fi
+
+{{ if eq .tailscaleMode "system" -}}
+# The distribution package, with tailscaled as a system service. Later
+# upgrades come from the system package manager.
+
+# Installing and enabling a system service needs root. Without it, skip
+# successfully, like the other install scripts.
+if [[ $EUID = 0 ]]; then
+    as_root=()
+elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+    as_root=(sudo)
+else
+    echo "Skipping Tailscale: installing it needs root or passwordless sudo." >&2
+    exit 0
+fi
+
+# Use absolute paths: aqua's links, which come first in PATH, may still
+# include tailscale and tailscaled from an older setup.
+tailscale=(/usr/bin/tailscale)
+
+if [[ ! -x /usr/sbin/tailscaled ]]; then
+    installer=$(mktemp)
+    trap 'rm -f "$installer"' EXIT
+    if command -v curl >/dev/null 2>&1; then
+        curl -fsSL https://tailscale.com/install.sh -o "$installer"
+    else
+        wget -qO "$installer" https://tailscale.com/install.sh
+    fi
+    # The installer adds the package repository, installs the package and
+    # enables tailscaled.
+    "${as_root[@]}" sh "$installer" </dev/null
+fi
+
+if ! systemctl is-enabled --quiet tailscaled; then
+    "${as_root[@]}" systemctl enable --now tailscaled
+fi
+
+login_command="sudo tailscale up --operator=\$USER"
+login_note="With --operator, later \`tailscale\` commands work without sudo."
+{{- else if eq .tailscaleMode "userspace" }}
+# aqua's tailscaled as a systemd user service in userspace networking mode,
+# defined in ~/.config/systemd/user/tailscaled.service. The version is pinned
+# in ~/.config/aqua/imports/tailscale.aqua.yaml, which Renovate updates.
+#
+# Rerun when the unit changes:
+# {{ include "dot_config/systemd/user/tailscaled.service" | sha256sum }}
+
+if ! systemctl --user show-environment >/dev/null 2>&1; then
+    echo "Skipping Tailscale: no systemd user manager is running." >&2
+    exit 0
+fi
+
+tailscale=(
+    "${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin/tailscale"
+    --socket="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/tailscale/tailscaled.sock"
+)
+
+# Download the package now rather than on the service's first start.
+"${tailscale[0]}" version >/dev/null
+
+# Lingering keeps the user manager, and so tailscaled, running while logged
+# out. polkit usually lets users enable it for themselves.
+user=$(id -un)
+loginctl enable-linger --no-ask-password "$user" 2>/dev/null || true
+if [[ $(loginctl show-user "$user" --property=Linger --value 2>/dev/null) != yes ]]; then
+    echo "Lingering is off, so tailscaled stops when you log out." >&2
+    echo "Ask an administrator to run \`loginctl enable-linger $user\` to keep it running." >&2
+fi
+
+systemctl --user daemon-reload
+if systemctl --user is-active --quiet tailscaled; then
+    # A restart drops every connection over the tailnet, possibly the SSH
+    # session running `chezmoi apply`, so leave it to the user.
+    echo "Run \`systemctl --user restart tailscaled\` to apply changes to tailscaled." >&2
+else
+    systemctl --user enable --now tailscaled
+fi
+
+login_command='tailscale up'
+login_note="The \`tailscale\` alias in ~/.zshrc points the CLI at the user service."
+{{- end }}
+
+# A freshly started tailscaled takes a moment to open its socket.
+state=
+for _ in 1 2 3 4 5; do
+    state=$("${tailscale[@]}" status --json 2>/dev/null |
+        sed -n 's/.*"BackendState": *"\([^"]*\)".*/\1/p') || true
+    [[ -n $state ]] && break
+    sleep 1
+done
+# "Stopped" means `tailscale down`, which is the user's choice.
+if [[ $state != Running && $state != Stopped ]]; then
+    echo "Tailscale is installed but this machine is not connected to a tailnet." >&2
+    echo "Run \`$login_command\` and log in from the URL it prints." >&2
+    echo "$login_note" >&2
+fi
+{{ end -}}
