@@ -86,7 +86,9 @@ in from the Tailscale app.
 In userspace mode:
 
 - The `tailscale` command is a zsh alias that adds `--socket`, because the
-  user service's socket is not at the default path.
+  user service's socket is not at the default path. A shell started before
+  `chezmoi apply` added the alias does not have it; run `exec zsh` first, or
+  `tailscale` fails with `dial unix /var/run/tailscale/tailscaled.sock`.
 - Connections from the tailnet to this machine reach the same port on
   localhost, so SSH and development servers work as usual.
 - The machine has no Tailscale network interface. Connect out to the tailnet

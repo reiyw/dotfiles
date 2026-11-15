@@ -91,8 +91,10 @@ else
     systemctl --user enable --now tailscaled
 fi
 
-login_command='tailscale up'
-login_note="The \`tailscale\` alias in ~/.zshrc points the CLI at the user service."
+# The shell that ran `chezmoi apply` may predate the alias in ~/.zshrc, so
+# print the command with --socket spelled out.
+login_command="tailscale ${tailscale[1]} up"
+login_note="In new shells, the \`tailscale\` alias in ~/.zshrc adds --socket."
 {{- end }}
 
 # A freshly started tailscaled takes a moment to open its socket.
