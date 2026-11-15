@@ -129,6 +129,10 @@ alias ls='lsd'
 alias l='ls -la'
 alias la='ls -a'
 alias lt='ls --tree'
+{{- if eq .tailscaleMode "userspace" }}
+# tailscaled runs as a user service with its socket outside the default path.
+alias tailscale='tailscale --socket="${XDG_RUNTIME_DIR:-/run/user/$UID}/tailscale/tailscaled.sock"'
+{{- end }}
 
 #
 # Local overrides

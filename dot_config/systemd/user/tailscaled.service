@@ -1,0 +1,23 @@
+# tailscaled for machines without root (tailscaleMode = "userspace").
+#
+# Userspace networking needs no TUN device: connections from the tailnet to
+# this machine reach the same port on localhost, and connections out to the
+# tailnet go through the SOCKS5/HTTP proxy on localhost:1055 or `tailscale nc`.
+# The CLI needs --socket to reach this tailscaled; ~/.zshrc defines the alias.
+[Unit]
+Description=Tailscale node agent (userspace networking)
+Documentation=https://tailscale.com/kb/1112/userspace-networking
+
+[Service]
+# aqua's link; AQUA_GLOBAL_CONFIG comes from ~/.config/environment.d.
+ExecStart=%h/.local/share/aquaproj-aqua/bin/tailscaled \
+    --tun=userspace-networking \
+    --socket=%t/tailscale/tailscaled.sock \
+    --statedir=%h/.local/share/tailscale \
+    --socks5-server=localhost:1055 \
+    --outbound-http-proxy-listen=localhost:1055
+RuntimeDirectory=tailscale
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

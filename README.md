@@ -46,6 +46,60 @@ systemd user services (such as the T3 Code server) that do not read shell
 startup files see the same `PATH`. After that file changes, `chezmoi apply`
 reloads the systemd user manager; restart running services to pick it up.
 
+## Tailscale
+
+How Tailscale is installed on Linux depends on the `tailscaleMode` that
+`chezmoi init` stores in the chezmoi config. It is decided once so that it does
+not change between runs with the sudo credential cache:
+
+- `system` (root or passwordless `sudo` available, or Tailscale already
+  installed): the installer installs Tailscale from its package repository and
+  enables the `tailscaled` system service, so `apt-get upgrade` keeps it up to
+  date.
+- `userspace` (no root): aqua installs `tailscale` and `tailscaled`, and
+  `tailscaled` runs as the systemd user service
+  `~/.config/systemd/user/tailscaled.service` in
+  [userspace networking mode](https://tailscale.com/kb/1112/userspace-networking).
+  The package is listed in `~/.config/aqua/imports/tailscale.aqua.yaml`, which
+  only these machines get, so aqua's link never hides the system `tailscale`
+  elsewhere.
+- `none`: Codespaces, dev containers and non-Linux systems.
+
+On macOS, the installer installs the Tailscale app with Homebrew.
+
+To change the mode, for example after gaining `sudo`, run `chezmoi init` again
+or edit `tailscaleMode` in `~/.config/chezmoi/chezmoi.toml`. Machines set up
+before `tailscaleMode` existed need `chezmoi init` (or `chezmoi apply --init`)
+once.
+
+Joining the tailnet needs a browser login, so it is not automated. Run this
+once and open the URL it prints:
+
+```shell
+sudo tailscale up --operator=$USER  # system
+tailscale up                        # userspace
+```
+
+`--operator` lets later `tailscale` commands run without `sudo`. On macOS, log
+in from the Tailscale app.
+
+In userspace mode:
+
+- The `tailscale` command is a zsh alias that adds `--socket`, because the
+  user service's socket is not at the default path.
+- Connections from the tailnet to this machine reach the same port on
+  localhost, so SSH and development servers work as usual.
+- The machine has no Tailscale network interface. Connect out to the tailnet
+  through the SOCKS5/HTTP proxy on `localhost:1055` (e.g.
+  `curl --proxy socks5h://localhost:1055 http://host:8080`) or, for SSH, with
+  `ProxyCommand tailscale --socket=… nc %h %p`. MagicDNS names resolve only
+  through these.
+- `tailscaled` keeps running after logout only when lingering is enabled.
+  `chezmoi apply` tries to enable it and reports when it cannot.
+- After Renovate updates the version, run
+  `systemctl --user restart tailscaled`. `chezmoi apply` does not restart it,
+  because that would drop SSH sessions over the tailnet.
+
 ## Agent skills
 
 Agent skills are managed as chezmoi externals under `~/.agents/skills`. They are

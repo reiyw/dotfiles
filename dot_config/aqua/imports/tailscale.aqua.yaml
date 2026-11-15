@@ -1,0 +1,6 @@
+# Imported by ~/aqua.yaml. chezmoi installs this file only where tailscaled
+# runs in userspace networking mode (tailscaleMode = "userspace"). Elsewhere the
+# tailscale command must come from the system package, which aqua's links in
+# PATH would otherwise hide.
+packages:
+- name: tailscale/tailscale@v1.104.5

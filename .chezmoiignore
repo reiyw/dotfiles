@@ -13,6 +13,11 @@ install.sh
 .config/environment.d/
 {{- end }}
 
+{{- if ne .tailscaleMode "userspace" }}
+.config/aqua/imports/tailscale.aqua.yaml
+.config/systemd/user/tailscaled.service
+{{- end }}
+
 {{- if eq .chezmoi.os "darwin" }}
 .aerospace.toml
 .config/karabiner/karabiner.json
