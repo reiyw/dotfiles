@@ -52,10 +52,12 @@ How Tailscale is installed on Linux depends on the `tailscaleMode` that
 `chezmoi init` stores in the chezmoi config. It is decided once so that it does
 not change between runs with the sudo credential cache:
 
-- `system` (root or passwordless `sudo` available, or Tailscale already
-  installed): the installer installs Tailscale from its package repository and
-  enables the `tailscaled` system service, so `apt-get upgrade` keeps it up to
-  date.
+- `system` (root, a member of `sudo`, `wheel` or `admin`, passwordless `sudo`,
+  or Tailscale already installed): the installer installs Tailscale from its
+  package repository and enables the `tailscaled` system service, so
+  `apt-get upgrade` keeps it up to date. `chezmoi apply` asks for the `sudo`
+  password if it needs one; if `sudo` fails, the script fails and the next
+  `chezmoi apply` tries again.
 - `userspace` (no root): aqua installs `tailscale` and `tailscaled`, and
   `tailscaled` runs as the systemd user service
   `~/.config/systemd/user/tailscaled.service` in
@@ -68,7 +70,8 @@ not change between runs with the sudo credential cache:
 On macOS, the installer installs the Tailscale app with Homebrew.
 
 To change the mode, for example after gaining `sudo`, run `chezmoi init` again
-or edit `tailscaleMode` in `~/.config/chezmoi/chezmoi.toml`. Machines set up
+or edit `tailscaleMode` in `~/.config/chezmoi/chezmoi.toml`. Moving from
+`userspace` to `system` stops and removes the user service. Machines set up
 before `tailscaleMode` existed need `chezmoi init` (or `chezmoi apply --init`)
 once.
 
@@ -86,7 +89,9 @@ in from the Tailscale app.
 In userspace mode:
 
 - The `tailscale` command is a zsh alias that adds `--socket`, because the
-  user service's socket is not at the default path.
+  user service's socket is not at the default path. A shell started before
+  `chezmoi apply` added the alias does not have it; run `exec zsh` first, or
+  `tailscale` fails with `dial unix /var/run/tailscale/tailscaled.sock`.
 - Connections from the tailnet to this machine reach the same port on
   localhost, so SSH and development servers work as usual.
 - The machine has no Tailscale network interface. Connect out to the tailnet

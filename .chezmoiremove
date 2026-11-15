@@ -7,6 +7,8 @@
 
 {{- if ne .tailscaleMode "userspace" }}
 # Left behind when a machine moves from userspace tailscaled to the system
-# package; aqua's tailscale would otherwise hide the system one in PATH.
+# package; aqua's tailscale would otherwise hide the system one in PATH. The
+# install script stops the user service.
 .config/aqua/imports/tailscale.aqua.yaml
+.config/systemd/user/tailscaled.service
 {{- end }}

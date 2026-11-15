@@ -3,7 +3,9 @@
 {{- /*
 How tailscaled runs on Linux, decided once here so that it does not change
 from one `chezmoi apply` to the next with the sudo credential cache:
-  system:    the distribution package and the tailscaled system service
+  system:    the distribution package and the tailscaled system service,
+             for machines where the user is root or can use sudo (member
+             of sudo, wheel or admin, or passwordless sudo)
   userspace: aqua's tailscaled as a systemd user service in userspace
              networking mode, for machines without root
   none:      not installed (other OSes, Codespaces and dev containers)
@@ -12,7 +14,13 @@ unavailable while `chezmoi init` runs.
 */ -}}
 {{- $tailscaleMode := "none" -}}
 {{- if and (eq .chezmoi.os "linux") (not $codespaces) (not $remoteContainers) -}}
-{{-   if or (stat "/usr/sbin/tailscaled") (output "sh" "-c" "if [ \"$(id -u)\" = 0 ] || sudo -n true 2>/dev/null; then echo yes; fi" | trim) -}}
+{{-   $canSudo := output "sh" "-c" `
+if [ "$(id -u)" = 0 ] || sudo -n true 2>/dev/null; then
+  echo yes
+elif command -v sudo >/dev/null 2>&1 && id -Gn | tr ' ' '\n' | grep -qxE 'sudo|wheel|admin'; then
+  echo yes
+fi` | trim -}}
+{{-   if or (stat "/usr/sbin/tailscaled") $canSudo -}}
 {{-     $tailscaleMode = "system" -}}
 {{-   else -}}
 {{-     $tailscaleMode = "userspace" -}}
