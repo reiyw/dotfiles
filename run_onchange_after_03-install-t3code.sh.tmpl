@@ -1,6 +1,9 @@
-{{ if and (eq .chezmoi.os "linux") (not .codespaces) (not .remoteContainers) -}}
+{{ if and (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) (not .codespaces) (not .remoteContainers) -}}
 #!/usr/bin/env bash
-# Install the T3 Code CLI and run it as a systemd user service.
+# Install the T3 Code CLI and run it as a background service: a systemd user
+# service on Linux, a launchd agent on macOS.
+#
+# A machine with the T3 Code desktop app is left to the app; see below.
 #
 # This only moves T3 Code forward: when `t3 update` has already put this
 # machine on a newer version than the one pinned here, nothing is changed.
@@ -13,7 +16,24 @@ pinned_version=0.1.9 # renovate: datasource=github-releases depName=pingdotgg/t3
 
 t3_home="${T3CODE_HOME:-$HOME/.t3}"
 launcher="$HOME/.local/bin/t3"
+{{- if eq .chezmoi.os "darwin" }}
+unit="$HOME/Library/LaunchAgents/com.t3tools.t3code.service.plist"
+{{- else }}
 unit="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/t3code.service"
+{{- end }}
+
+# The desktop app writes its own `t3` command to $t3_home/bin/t3, marked with
+# this line, and keeps its data in the same T3 home. The installer takes a
+# ~/.local/bin/t3 that points there for its own and replaces it, so the CLI
+# here would stop following the app's version while sharing its data. Leave
+# such a machine to the app, which updates itself.
+desktop_cli="$t3_home/bin/t3"
+desktop_marker="Written by T3 Code: runs the desktop app's bundled t3 CLI."
+if [[ -f $desktop_cli ]] && grep -qF "$desktop_marker" "$desktop_cli"; then
+    echo "Skipping T3 Code: the desktop app manages ${t3_home}." >&2
+    exit 0
+fi
+{{- if eq .chezmoi.os "linux" }}
 
 run_with_sudo() {
     if [[ $EUID = 0 ]]; then
@@ -25,10 +45,24 @@ run_with_sudo() {
         return 1
     fi
 }
+{{- end }}
 
 # Succeeds when version $1 is newer than version $2.
 version_gt() {
     [[ $1 != "$2" && $(printf '%s\n%s\n' "$1" "$2" | sort -V | tail -n 1) = "$1" ]]
+}
+
+# The executable the launcher runs. The installer and `t3 update` write a
+# script whose second line is `exec '<executable>' "$@"`; older installs made
+# the launcher a symlink.
+launcher_target() {
+    local line
+    if [[ -L $launcher ]]; then
+        readlink "$launcher"
+    elif [[ -f $launcher ]] && { read -r _ && read -r line; } <"$launcher"; then
+        line=${line#"exec '"}
+        printf '%s\n' "${line%"' \"\$@\""}"
+    fi
 }
 
 # The newest of the version the service runs and the one the launcher points at.
@@ -37,7 +71,7 @@ installed_version() {
     if version=$(sed -n 's/.*"activeVersion": *"\([^"]*\)".*/\1/p' "$t3_home/runtime/service-state.json" 2>/dev/null) && [[ -n $version ]]; then
         versions+=("$version")
     fi
-    if link=$(readlink "$launcher" 2>/dev/null) && [[ $link = "$t3_home/runtime/versions/"*/t3 ]]; then
+    if link=$(launcher_target 2>/dev/null) && [[ $link = "$t3_home/runtime/versions/"*/t3 ]]; then
         version=${link#"$t3_home/runtime/versions/"}
         versions+=("${version%/t3}")
     fi
@@ -67,6 +101,18 @@ elif [[ -z $current_version ]] || version_gt "$pinned_version" "$current_version
 elif [[ $current_version != "$pinned_version" ]]; then
     echo "T3 Code ${current_version} is newer than ${pinned_version}; leaving it as is." >&2
 fi
+{{- if eq .chezmoi.os "darwin" }}
+
+# The launchd agent starts at login and stops at logout. Over SSH with nobody
+# logged in at the Mac, `t3 service install` can fail to start it; the agent
+# is still installed then and starts at the next login.
+if [[ ! -f $unit ]]; then
+    if ! "$launcher" service install && [[ ! -f $unit ]]; then
+        exit 1
+    fi
+    echo "Run \`t3 up\` to choose how your other devices reach T3 Code." >&2
+fi
+{{- else }}
 
 # /run/systemd/system exists only when systemd is PID 1. Check it first: dev
 # container images ship a fake systemctl that succeeds without systemd.
@@ -95,4 +141,5 @@ if [[ ! -f $unit ]]; then
     "$launcher" service install
     echo "Run \`t3 up\` to choose how your other devices reach T3 Code." >&2
 fi
+{{- end }}
 {{ end -}}
