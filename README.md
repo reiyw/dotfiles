@@ -110,3 +110,8 @@ In userspace mode:
 Agent skills are managed as chezmoi externals under `~/.agents/skills`. They are
 installed and refreshed automatically by `chezmoi apply`. Chezmoi also creates
 links under `~/.claude/skills` so Claude Code can discover the same skills.
+
+Global agent instructions live in `~/.agents/AGENTS.md`. Chezmoi links
+`~/.codex/AGENTS.md` to it for Codex. For Claude Code, chezmoi adds the line
+`@~/.agents/AGENTS.md` to `~/.claude/CLAUDE.md` and keeps any other lines in
+that file, so machine-specific instructions can stay there.
