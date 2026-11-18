@@ -46,6 +46,18 @@ systemd user services (such as the T3 Code server) that do not read shell
 startup files see the same `PATH`. After that file changes, `chezmoi apply`
 reloads the systemd user manager; restart running services to pick it up.
 
+## T3 Code
+
+On Linux and macOS, the installer installs the `t3` CLI at the version pinned
+in `run_onchange_after_03-install-t3code.sh.tmpl` and runs it as a background
+service: a systemd user service on Linux (with lingering enabled), a launchd
+agent on macOS. Run `t3 up` afterwards to choose how other devices reach it.
+
+A machine with the T3 Code desktop app is skipped. The app writes its own `t3`
+command to `~/.t3/bin/t3` and keeps its data in `~/.t3`, so a separately
+installed CLI would share that data at a different version. Such a machine
+gets T3 Code updates from the app.
+
 ## Tailscale
 
 How Tailscale is installed on Linux depends on the `tailscaleMode` that
