@@ -6,4 +6,4 @@ export AQUA_GLOBAL_CONFIG="$HOME/aqua.yaml"
 export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
 export PATH="$PNPM_HOME/bin:$PATH"
 
-pnpm add -g @openai/codex@0.167.2
+pnpm add -g @openai/codex@0.170.0
