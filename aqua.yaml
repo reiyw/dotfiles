@@ -36,7 +36,7 @@ packages:
 - name: jqlang/jq@jq-1.8.2
 - name: junegunn/fzf@v0.75.0
 - name: koalaman/shellcheck@v0.11.0
-- name: kubernetes/kubectl@v1.37.2
+- name: kubernetes/kubectl@v1.37.3
 - name: lsd-rs/lsd@v1.2.0
 - name: mvdan/sh@v3.14.1
 - name: neovim/neovim@v0.12.6
